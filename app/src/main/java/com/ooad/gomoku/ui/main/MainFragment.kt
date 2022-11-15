@@ -6,7 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import com.ooad.gomoku.R
+import android.content.Intent
+import com.ooad.gomoku.HostActivity
 
 class MainFragment : Fragment() {
 
@@ -20,11 +23,20 @@ class MainFragment : Fragment() {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         // TODO: Use the ViewModel
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_main, container, false);
+        val button : Button = view.findViewById<Button>(R.id.button);
+        button.setOnClickListener {
+            requireActivity().run{
+                startActivity(Intent(this, HostActivity::class.java))
+//                finish()
+            }
+        }
+        return view;
     }
 
 }
