@@ -11,14 +11,14 @@ import androidx.core.view.isVisible
 class HostActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_host_game)
+        setContentView(R.layout.activity_host)
 
-        val createButton = findViewById<Button>(R.id.createGameButton)
+        val createButton = findViewById<Button>(R.id.create_game_button)
         createButton.setOnClickListener{
-            findViewById<TextView>(R.id.waitLabel).isVisible = true;
-            findViewById<ProgressBar>(R.id.progressBar).isVisible = true;
-            findViewById<Button>(R.id.createGameButton).isEnabled = false;
-            findViewById<EditText>(R.id.inputName).isEnabled = false;
+            findViewById<TextView>(R.id.wait_label).isVisible = true;
+            findViewById<ProgressBar>(R.id.progress_bar).isVisible = true;
+            findViewById<Button>(R.id.create_game_button).isEnabled = false;
+            findViewById<EditText>(R.id.input_name).isEnabled = false;
         }
     }
 }

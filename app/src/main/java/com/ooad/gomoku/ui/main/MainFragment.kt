@@ -10,6 +10,7 @@ import android.widget.Button
 import com.ooad.gomoku.R
 import android.content.Intent
 import com.ooad.gomoku.HostActivity
+import com.ooad.gomoku.JoinActivity
 
 class MainFragment : Fragment() {
 
@@ -29,11 +30,16 @@ class MainFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         val view: View = inflater.inflate(R.layout.fragment_main, container, false);
-        val button : Button = view.findViewById<Button>(R.id.button);
-        button.setOnClickListener {
+        val hostButton : Button = view.findViewById<Button>(R.id.host_game);
+        hostButton.setOnClickListener {
             requireActivity().run{
                 startActivity(Intent(this, HostActivity::class.java))
-//                finish()
+            }
+        }
+        val joinButton : Button = view.findViewById<Button>(R.id.join_button);
+        joinButton.setOnClickListener {
+            requireActivity().run{
+                startActivity(Intent(this, JoinActivity::class.java))
             }
         }
         return view;

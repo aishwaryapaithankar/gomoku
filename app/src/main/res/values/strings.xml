@@ -2,6 +2,6 @@
     <string name="app_name">Gomoku</string>
     <string name="host_game">Host Game</string>
     <string name="join_game">Join Game</string>
-    <string name="name_label">Name</string>
+    <string name="name_label">Enter Player Name</string>
     <string name="host_wait">Waiting for other players to join</string>
 </resources>

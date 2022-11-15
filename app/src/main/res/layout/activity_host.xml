@@ -4,19 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FAE197"
+    android:background="@color/light_yellow"
     android:foregroundTint="@color/navy_blue"
     tools:context=".HostActivity">
 
     <TextView
-        android:id="@+id/nameLabel"
-        android:layout_width="wrap_content"
+        android:id="@+id/name_label"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="174dp"
-        android:layout_marginTop="156dp"
-        android:layout_marginEnd="174dp"
         android:text="@string/name_label"
         android:textSize="24sp"
+        android:layout_marginTop="180dp"
+        android:textAlignment="center"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -24,60 +23,53 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/waitLabel"
-        android:layout_width="wrap_content"
+        android:id="@+id/wait_label"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="173dp"
-        android:layout_marginTop="432dp"
-        android:layout_marginEnd="174dp"
         android:text="@string/host_wait"
         android:textSize="24sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="30dp"
+        android:textAlignment="center"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@+id/create_game_button"
+        app:layout_constraintHorizontal_bias="0.0" />
 
     <EditText
-        android:id="@+id/inputName"
+        android:id="@+id/input_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="90dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="90dp"
-        android:ems="10"
+        android:layout_marginTop="25dp"
         android:inputType="textPersonName"
         android:isScrollContainer="false"
         android:maxLength="10"
-        android:text="Name"
+        android:hint="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/name_label"
+        tools:layout_editor_absoluteX="100dp" />
 
     <Button
-        android:id="@+id/createGameButton"
+        android:id="@+id/create_game_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="135dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="135dp"
         android:text="Create Game"
+        android:layout_marginTop="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputName" />
+        app:layout_constraintTop_toBottomOf="@+id/input_name"
+
+ />
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/progress_bar"
         style="?android:attr/progressBarStyle"
-        android:layout_width="133dp"
+        android:layout_width="match_parent"
         android:layout_height="97dp"
-        android:layout_marginStart="139dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="139dp"
         android:indeterminateTint="@color/navy_blue"
         android:visibility="invisible"
+        android:layout_marginTop="50dp"
+        app:layout_constraintTop_toBottomOf="@+id/wait_label"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/waitLabel" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
