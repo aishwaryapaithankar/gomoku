@@ -1,12 +1,12 @@
 package com.ooad.gomoku
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.ooad.gomoku.network.ConnectionManager
 
 class JoinAvailableGameFragment : Fragment() {
@@ -20,10 +20,14 @@ class JoinAvailableGameFragment : Fragment() {
     private lateinit var viewModel: JoinAvailableGameViewModel
     private lateinit var connManager: ConnectionManager
     private lateinit var playerName: String
+    private var games: MutableList<String> = arrayListOf()
+    private lateinit var gamesListAdapter: ArrayAdapter<*>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        connManager = ConnectionManager(requireActivity())
+        connManager = ConnectionManager(requireActivity()).apply {
+            serverDiscoveredCallback = ::addGame
+        }
     }
 
     override fun onCreateView(
@@ -41,34 +45,59 @@ class JoinAvailableGameFragment : Fragment() {
 
         Toast.makeText(requireActivity(), "Player Name $playerName", Toast.LENGTH_SHORT).show()
 
-        val listview : ListView? = getView()?.findViewById(R.id.games_list)
-
-        val games = arrayListOf("A","B","C")
-        val listAdapter : ArrayAdapter<*> = ArrayAdapter(requireActivity(),android.R.layout.simple_list_item_1, games)
-        listview?.adapter = listAdapter
-
-        games.add("D")
-        listAdapter.notifyDataSetChanged()
-        listview?.onItemClickListener = AdapterView.OnItemClickListener {adapterView, _, position, _ ->
-            val selectedItem = adapterView.getItemAtPosition(position) as String
-            val itemIdAtPos = adapterView.getItemIdAtPosition(position)
-            Toast.makeText(requireActivity(),"click item $selectedItem its position $itemIdAtPos",Toast.LENGTH_SHORT).show()
-        }
+        val listview: ListView? = getView()?.findViewById(R.id.games_list)
+        gamesListAdapter =
+            ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, games)
+        listview?.adapter = gamesListAdapter
+        listview?.onItemClickListener =
+            AdapterView.OnItemClickListener { adapterView, _, position, _ ->
+                joinGame(adapterView.getItemAtPosition(position) as String)
+                Toast.makeText(
+                    requireActivity(),
+                    "click item at position $position",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
     }
 
     override fun onResume() {
         super.onResume()
-        connManager.initClient()
+        searchGame()
     }
 
     override fun onPause() {
         connManager.tearDownService()
+        games.clear()
         super.onPause()
     }
 
     override fun onDestroy() {
         connManager.tearDown()
         super.onDestroy()
+    }
+
+    private fun searchGame() {
+        connManager.initClient()
+    }
+
+    private fun displayGames() {
+        requireActivity().runOnUiThread {
+            gamesListAdapter.notifyDataSetChanged()
+            if (games.size > 0) {
+                val label: TextView? = view?.findViewById(R.id.available_label)
+                label?.visibility = View.VISIBLE
+            }
+        }
+
+    }
+
+    private fun addGame(newGame: String) {
+        games.add(newGame)
+        displayGames()
+    }
+
+    private fun joinGame(gameName: String) {
+        viewModel.connectToServer(gameName)
     }
 }
 

@@ -18,10 +18,10 @@ class HostActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_host)
 
-        connManager  = ConnectionManager(this)
+        connManager = ConnectionManager(this)
 
         val createButton = findViewById<Button>(R.id.create_game_button)
-        createButton.setOnClickListener{
+        createButton.setOnClickListener {
             findViewById<TextView>(R.id.wait_label).isVisible = true
             findViewById<ProgressBar>(R.id.progress_bar).isVisible = true
             createButton.isEnabled = false
