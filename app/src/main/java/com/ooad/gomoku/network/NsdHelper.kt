@@ -104,5 +104,5 @@ class NsdHelper(context: Context) {
 }
 
 private const val TAG = "NsdHelper"
-private const val SERVICE_TYPE = "_gomoku._tcp"
+private const val SERVICE_TYPE = "_gomoku._tcp."
 //private const val SERVICE_NAME = "Gomoku"

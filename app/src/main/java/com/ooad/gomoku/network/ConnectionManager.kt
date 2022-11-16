@@ -3,7 +3,6 @@ package com.ooad.gomoku.network
 import android.content.Context
 import android.net.nsd.NsdServiceInfo
 import android.util.Log
-import java.net.InetAddress
 import java.net.ServerSocket
 import java.net.Socket
 
@@ -14,7 +13,8 @@ class ConnectionManager(context: Context) {
     private val nsdHelper: NsdHelper = NsdHelper(context)
     private var serverSocket: ServerSocket? = null
     private var clientSocket: Socket? = null
-    private val serversFound: MutableList<NsdServiceInfo> = ArrayList()
+    private val serverList: MutableList<NsdServiceInfo> = ArrayList()
+    lateinit var serverDiscoveredCallback: (String) -> Unit
 
     private fun initializeServerSocket() {
         // Use any available port for server socket
@@ -33,19 +33,21 @@ class ConnectionManager(context: Context) {
         nsdHelper.registerService(serverName)
     }
 
-    private fun initializeClientSocket(host: InetAddress, port: Int) {
-        clientSocket = Socket(host, port)
+    fun connectToServer(serverName: String) {
+        val serviceInfo: NsdServiceInfo = serverList.first { s -> s.serviceName == serverName }
+        clientSocket = Socket(serviceInfo.host, serviceInfo.port)
         val writer = clientSocket!!.getOutputStream().bufferedWriter()
         val reader = clientSocket!!.getInputStream().bufferedReader()
     }
 
     private fun onServerDiscovered(serviceInfo: NsdServiceInfo) {
-        serversFound.add(serviceInfo)
-        Log.i(TAG, "Servers found: ${serversFound.map { s -> s.serviceName }}")
+        serverList.add(serviceInfo)
+        Log.i(TAG, "Servers found: ${serverList.map { s -> s.serviceName }}")
+        serverDiscoveredCallback(serviceInfo.serviceName)
     }
 
     fun initClient() {
-        serversFound.clear()
+        serverList.clear()
         nsdHelper.onServerDiscovered = ::onServerDiscovered
         nsdHelper.discoverService()
     }
