@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.*
 
 class JoinAvailableGameFragment : Fragment() {
 
@@ -18,14 +19,24 @@ class JoinAvailableGameFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_join_available_game, container, false)
-    }
+    ): View? = inflater.inflate(R.layout.fragment_join_available_game, container, false)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(JoinAvailableGameViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this)[JoinAvailableGameViewModel::class.java]
+        val listview : ListView? = getView()?.findViewById(R.id.games_list)
+
+        val games = arrayListOf<String>("A","B","C")
+        val listAdapter : ArrayAdapter<*> = ArrayAdapter(requireActivity(),android.R.layout.simple_list_item_1, games)
+        listview?.adapter = listAdapter
+
+        games.add("D")
+        listAdapter.notifyDataSetChanged()
+        listview?.onItemClickListener = AdapterView.OnItemClickListener {adapterView, view, position, id ->
+            val selectedItem = adapterView.getItemAtPosition(position) as String
+            val itemIdAtPos = adapterView.getItemIdAtPosition(position)
+            Toast.makeText(requireActivity(),"click item $selectedItem its position $itemIdAtPos",Toast.LENGTH_SHORT).show()
+        }
     }
 
 }

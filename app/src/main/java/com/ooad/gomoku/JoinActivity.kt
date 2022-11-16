@@ -10,7 +10,7 @@ class JoinActivity : AppCompatActivity() {
         setContentView(R.layout.activity_join)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.join_activity_container, JoinGameFragment.newInstance()).commitNow()
+                .replace(R.id.join_activity_container, JoinAvailableGameFragment.newInstance()).commitNow()
         }
     }
 }
