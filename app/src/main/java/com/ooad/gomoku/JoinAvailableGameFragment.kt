@@ -9,6 +9,7 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.ooad.gomoku.network.ConnectionManager
+import kotlinx.coroutines.runBlocking
 
 class JoinAvailableGameFragment : Fragment() {
 
@@ -28,6 +29,8 @@ class JoinAvailableGameFragment : Fragment() {
         super.onCreate(savedInstanceState)
         connManager = ConnectionManager(requireActivity()).apply {
             serverDiscoveredCallback = ::addGame
+            val app = this@JoinAvailableGameFragment.requireActivity().application as GomokuApp
+            app.connManager = this
         }
     }
 
@@ -98,8 +101,9 @@ class JoinAvailableGameFragment : Fragment() {
     }
 
     private fun joinGame(gameName: String) {
-        viewModel.connectToServer(gameName)
-        startActivity(Intent(requireActivity(), GameActivity::class.java))
+        viewModel.connectToServer(gameName) {
+            startActivity(Intent(requireActivity(), GameActivity::class.java))
+        }
     }
 }
 

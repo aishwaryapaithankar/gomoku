@@ -9,9 +9,9 @@ import kotlinx.coroutines.launch
 class JoinAvailableGameViewModel : ViewModel() {
     lateinit var connManager: ConnectionManager
 
-    fun connectToServer(serverName: String) {
+    fun connectToServer(serverName: String, onConnected: () -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
-            connManager.connectToServer(serverName)
+            connManager.connectToServer(serverName, onConnected)
         }
     }
 }

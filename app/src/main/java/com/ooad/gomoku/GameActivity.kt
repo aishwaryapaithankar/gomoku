@@ -3,13 +3,28 @@ package com.ooad.gomoku
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import com.ooad.gomoku.data.Stats
+import com.ooad.gomoku.network.ConnectionManager
 
 class GameActivity : AppCompatActivity() {
+
+    private lateinit var viewModel: GameViewModel
+    private lateinit var connManager: ConnectionManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
-        var resultView : TextView = findViewById(R.id.result_display);
+
+        connManager = (application as GomokuApp).connManager
+        viewModel = ViewModelProvider(this)[GameViewModel::class.java]
+        viewModel.connManager = connManager
+
+        val resultView : TextView = findViewById(R.id.result_display);
         resultView.text = Stats.getDisplayString()
+
+        for (i in 1..10) {
+            viewModel.sendData("Hello: $i")
+        }
     }
 }
