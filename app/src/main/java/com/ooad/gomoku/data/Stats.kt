@@ -18,13 +18,21 @@ object Stats {
     private var drawn: Int = 0
 
     fun init(context: Context) {
-        //Todo(): initialize file correctly
-        file = File(context.filesDir, "stats.csv");
+        createFileIfNotExists(context)
         val content: List<String> = file.readText().split(",").map { content -> content.trim() }
+
         won = parseInt(content[0])
         lost = parseInt(content[1])
         total = parseInt(content[2])
         drawn = parseInt(content[3])
+    }
+
+    fun createFileIfNotExists(context: Context) {
+        file = File(context.filesDir, "stats.csv");
+        val notExists: Boolean = file.createNewFile()
+        if (notExists) {
+            file.writeText("0,0,0,0")
+        }
     }
 
     fun update(result: GameResult) {
@@ -39,4 +47,6 @@ object Stats {
     }
 
     private fun getFormattedString(): String = "$won,$lost,$total,$drawn"
+
+    fun getDisplayString(): String = "Won:$won,Lost:$lost,Drawn:$drawn,Total:$total"
 }

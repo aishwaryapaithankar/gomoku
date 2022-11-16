@@ -1,5 +1,6 @@
 package com.ooad.gomoku
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -98,6 +99,7 @@ class JoinAvailableGameFragment : Fragment() {
 
     private fun joinGame(gameName: String) {
         viewModel.connectToServer(gameName)
+        startActivity(Intent(requireActivity(), GameActivity::class.java))
     }
 }
 
