@@ -21,6 +21,7 @@ class ConnectionManager(context: Context) {
         if (serverSocket == null) {
             serverSocket = ServerSocket(0).also { socket ->
                 nsdHelper.localPort = socket.localPort
+                Log.i(TAG, "Server Socket Port: ${socket.localPort}")
             }
         }
     }
@@ -43,7 +44,7 @@ class ConnectionManager(context: Context) {
         Log.i(TAG, "Servers found: ${serversFound.map { s -> s.serviceName }}")
     }
 
-    private fun initClient() {
+    fun initClient() {
         serversFound.clear()
         nsdHelper.onServerDiscovered = ::onServerDiscovered
         nsdHelper.discoverService()

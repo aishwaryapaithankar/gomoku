@@ -35,8 +35,8 @@ class HostActivity : AppCompatActivity() {
     }
 
     override fun onResume() {
-        serverName?.apply { connManager.initServer(this) }
         super.onResume()
+        serverName?.apply { connManager.initServer(this) }
     }
 
     override fun onPause() {

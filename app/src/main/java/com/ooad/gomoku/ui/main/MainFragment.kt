@@ -22,27 +22,26 @@ class MainFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         // TODO: Use the ViewModel
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        val view: View = inflater.inflate(R.layout.fragment_main, container, false);
-        val hostButton : Button = view.findViewById<Button>(R.id.host_game);
+        val view: View = inflater.inflate(R.layout.fragment_main, container, false)
+        val hostButton : Button = view.findViewById(R.id.host_game)
         hostButton.setOnClickListener {
             requireActivity().run{
                 startActivity(Intent(this, HostActivity::class.java))
             }
         }
-        val joinButton : Button = view.findViewById<Button>(R.id.join_button);
+        val joinButton : Button = view.findViewById(R.id.join_button)
         joinButton.setOnClickListener {
             requireActivity().run{
                 startActivity(Intent(this, JoinActivity::class.java))
             }
         }
-        return view;
+        return view
     }
 
 }
