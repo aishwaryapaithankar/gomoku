@@ -37,6 +37,8 @@ class JoinAvailableGameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[JoinAvailableGameViewModel::class.java]
+        viewModel.connManager = connManager
+
         Toast.makeText(requireActivity(), "Player Name $playerName", Toast.LENGTH_SHORT).show()
 
         val listview : ListView? = getView()?.findViewById(R.id.games_list)
