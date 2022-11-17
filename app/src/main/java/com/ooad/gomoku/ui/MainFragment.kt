@@ -1,4 +1,4 @@
-package com.ooad.gomoku.ui.main
+package com.ooad.gomoku.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,8 +8,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.ooad.gomoku.HostActivity
-import com.ooad.gomoku.JoinActivity
 import com.ooad.gomoku.R
 
 class MainFragment : Fragment() {

@@ -1,9 +1,11 @@
-package com.ooad.gomoku
+package com.ooad.gomoku.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
+import com.ooad.gomoku.GomokuApp
+import com.ooad.gomoku.R
 import com.ooad.gomoku.data.Stats
 import com.ooad.gomoku.network.ConnectionManager
 

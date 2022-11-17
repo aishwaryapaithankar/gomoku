@@ -1,4 +1,4 @@
-package com.ooad.gomoku
+package com.ooad.gomoku.ui
 
 import androidx.lifecycle.ViewModel
 import com.ooad.gomoku.network.ConnectionManager

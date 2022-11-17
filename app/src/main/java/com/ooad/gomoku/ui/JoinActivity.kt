@@ -1,7 +1,8 @@
-package com.ooad.gomoku
+package com.ooad.gomoku.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.ooad.gomoku.R
 
 class JoinActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

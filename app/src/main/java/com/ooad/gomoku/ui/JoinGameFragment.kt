@@ -1,4 +1,4 @@
-package com.ooad.gomoku
+package com.ooad.gomoku.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import android.widget.EditText
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.ooad.gomoku.R
 
 class JoinGameFragment : Fragment() {
 

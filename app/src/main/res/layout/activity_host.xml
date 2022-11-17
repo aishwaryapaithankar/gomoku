@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/light_yellow"
     android:foregroundTint="@color/navy_blue"
-    tools:context=".HostActivity">
+    tools:context=".ui.HostActivity">
 
     <TextView
         android:id="@+id/name_label"

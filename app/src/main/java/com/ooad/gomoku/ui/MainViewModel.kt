@@ -1,4 +1,4 @@
-package com.ooad.gomoku.ui.main
+package com.ooad.gomoku.ui
 
 import androidx.lifecycle.ViewModel
 

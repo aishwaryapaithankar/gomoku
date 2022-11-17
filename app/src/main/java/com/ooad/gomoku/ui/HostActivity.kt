@@ -1,4 +1,4 @@
-package com.ooad.gomoku
+package com.ooad.gomoku.ui
 
 import android.os.Bundle
 import android.widget.Button
@@ -7,6 +7,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import com.ooad.gomoku.R
 import com.ooad.gomoku.network.ConnectionManager
 
 class HostActivity : AppCompatActivity() {
