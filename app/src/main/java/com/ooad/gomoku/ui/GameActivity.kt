@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import com.ooad.gomoku.GomokuApp
 import com.ooad.gomoku.R
+import com.ooad.gomoku.data.Player
 import com.ooad.gomoku.data.Stats
 import com.ooad.gomoku.engine.GameEngine
 import com.ooad.gomoku.engine.RemoteGameEngineProxy
@@ -35,7 +36,7 @@ class GameActivity : AppCompatActivity() {
 
     fun init() {
         // mostly move this to viewModel
-        gameEngine = GameEngine()
+        gameEngine = GameEngine(Player())
         val remoteEngine = RemoteGameEngineProxy(connManager)
     }
 }

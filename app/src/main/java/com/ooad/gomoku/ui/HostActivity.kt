@@ -31,13 +31,13 @@ class HostActivity : AppCompatActivity() {
                 serverName = text.toString()
             }
 
-            connManager.initServer(serverName!!)
+            connManager.initServer(serverName!!, ::onConnected)
         }
     }
 
     override fun onResume() {
         super.onResume()
-        serverName?.apply { connManager.initServer(this) }
+        serverName?.apply { connManager.initServer(this, ::onConnected) }
     }
 
     override fun onPause() {
@@ -48,5 +48,9 @@ class HostActivity : AppCompatActivity() {
     override fun onDestroy() {
         connManager.tearDown()
         super.onDestroy()
+    }
+
+    private fun onConnected() {
+        // Open GameActivity
     }
 }

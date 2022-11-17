@@ -28,20 +28,17 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view: View = inflater.inflate(R.layout.fragment_main, container, false)
-        val hostButton: Button = view.findViewById(R.id.host_game)
-        hostButton.setOnClickListener {
-            requireActivity().run {
-                startActivity(Intent(this, HostActivity::class.java))
-            }
+        return inflater.inflate(R.layout.fragment_main, container, false).apply {
+            findViewById<Button>(R.id.host_game).setOnClickListener(::hostGame)
+            findViewById<Button>(R.id.join_button).setOnClickListener(::joinGame)
         }
-        val joinButton: Button = view.findViewById(R.id.join_button)
-        joinButton.setOnClickListener {
-            requireActivity().run {
-                startActivity(Intent(this, JoinActivity::class.java))
-            }
-        }
-        return view
     }
 
+    private fun hostGame(v: View) = requireActivity().run {
+        startActivity(Intent(this, HostActivity::class.java))
+    }
+
+    private fun joinGame(v: View) = requireActivity().run {
+        startActivity(Intent(this, JoinActivity::class.java))
+    }
 }

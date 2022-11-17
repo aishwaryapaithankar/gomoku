@@ -24,7 +24,7 @@ class ConnectionManager(context: Context) {
     lateinit var serverDiscoveredCallback: (String) -> Unit
     lateinit var moveCallback: (String) -> Unit
 
-    private fun initializeServerSocket() {
+    private fun initializeServerSocket(onConnected: () -> Unit) {
         if (serverSocket != null)
             return
 
@@ -38,12 +38,13 @@ class ConnectionManager(context: Context) {
             clientSocket = withContext(Dispatchers.IO) { serverSocket!!.accept() }
             Log.i(TAG, "Received conn from: ${clientSocket!!.inetAddress}:${clientSocket!!.port}")
             handleConnection()
+            onConnected()
         }
     }
 
-    fun initServer(serverName: String) {
+    fun initServer(serverName: String, onConnected: () -> Unit) {
         // 1. Create server socket
-        initializeServerSocket()
+        initializeServerSocket(onConnected)
         // 2. Register a network service using the server socket
         nsdHelper.registerService(serverName)
     }
