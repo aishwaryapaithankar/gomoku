@@ -4,7 +4,7 @@ import com.ooad.gomoku.data.GameResult
 
 object ResultPublisher {
     private lateinit var result: GameResult
-    private var observers : MutableList<Observer> = ArrayList<Observer>()
+    private var observers : MutableList<Observer> = ArrayList()
 
     fun registerObserver(observer: Observer) {
         observers.add(observer)

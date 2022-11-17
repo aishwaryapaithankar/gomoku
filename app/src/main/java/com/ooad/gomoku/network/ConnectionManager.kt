@@ -22,6 +22,7 @@ class ConnectionManager(context: Context) {
     private lateinit var reader: BufferedReader
 
     lateinit var serverDiscoveredCallback: (String) -> Unit
+    lateinit var moveCallback: (String) -> Unit
 
     private fun initializeServerSocket() {
         if (serverSocket != null)
@@ -61,6 +62,12 @@ class ConnectionManager(context: Context) {
         Log.i(TAG, "writer: $writer, reader:$reader")
     }
 
+    private fun processData(data: String) {
+        when {
+            data.startsWith("move") -> moveCallback(data)
+        }
+    }
+
     private fun listenForData() {
         var data: String
         while (true) {
@@ -71,7 +78,7 @@ class ConnectionManager(context: Context) {
                     break
                 }
 
-                // Provide input to callback
+                processData(data)
                 Log.i(TAG, "Received data: $data")
             } catch (e: Exception) {
                 Log.e(TAG, "Handled Exception: ${e.message}")
