@@ -7,6 +7,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import com.ooad.gomoku.GomokuApp
 import com.ooad.gomoku.R
 import com.ooad.gomoku.network.ConnectionManager
 
@@ -24,6 +25,7 @@ class HostActivity : AppCompatActivity() {
         }
 
         connManager = ConnectionManager(this)
+        (application as GomokuApp).connManager = connManager
 
         val createButton = findViewById<Button>(R.id.create_game_button)
         createButton.setOnClickListener {
