@@ -35,10 +35,14 @@ class ConnectionManager(context: Context) {
         }
 
         CoroutineScope(Dispatchers.IO).launch {
-            clientSocket = withContext(Dispatchers.IO) { serverSocket!!.accept() }
-            Log.i(TAG, "Received conn from: ${clientSocket!!.inetAddress}:${clientSocket!!.port}")
-            handleConnection()
-            onConnected()
+            try {
+                clientSocket = withContext(Dispatchers.IO) { serverSocket!!.accept() }
+                Log.i(TAG, "Received conn from: ${clientSocket!!.inetAddress}:${clientSocket!!.port}")
+                handleConnection()
+                onConnected()
+            } catch (e: Exception) {
+                Log.e(TAG, "Handled Exception: ${e.message}")
+            }
         }
     }
 

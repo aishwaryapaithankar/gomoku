@@ -15,7 +15,7 @@
 
         <TextView
             android:id="@+id/game_title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="116dp"
             android:fontFamily="monospace"
@@ -25,6 +25,10 @@
             android:textColor="@color/navy_blue"
             android:textSize="60sp"
             android:textStyle="bold"
+            android:shadowColor="@color/black"
+            android:shadowDx="10"
+            android:shadowDy="10"
+            android:shadowRadius="10"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

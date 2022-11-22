@@ -18,6 +18,10 @@ class HostActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_host)
+        supportActionBar?.run {
+            setDisplayHomeAsUpEnabled(true)
+            title = "Host Game"
+        }
 
         connManager = ConnectionManager(this)
 
@@ -48,6 +52,11 @@ class HostActivity : AppCompatActivity() {
     override fun onDestroy() {
         connManager.tearDown()
         super.onDestroy()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 
     private fun onConnected() {
