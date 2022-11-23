@@ -103,7 +103,10 @@ class JoinAvailableGameFragment : Fragment() {
 
     private fun joinGame(gameName: String) {
         viewModel.connectToServer(gameName) {
-            startActivity(Intent(requireActivity(), GameActivity::class.java))
+            startActivity(Intent(requireActivity(), GameActivity::class.java).apply {
+                putExtra(KEY_PLAYER_NAME, playerName)
+                putExtra(KEY_PLAYER_TYPE, "Peer")
+            })
         }
     }
 }

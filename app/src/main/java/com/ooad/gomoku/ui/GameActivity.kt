@@ -9,14 +9,17 @@ import com.ooad.gomoku.R
 import com.ooad.gomoku.data.Player
 import com.ooad.gomoku.data.Stats
 import com.ooad.gomoku.engine.GameEngine
+import com.ooad.gomoku.engine.Piece
 import com.ooad.gomoku.engine.RemoteGameEngineProxy
 import com.ooad.gomoku.network.ConnectionManager
+import com.ooad.gomoku.ui.view.BoardView
 
 class GameActivity : AppCompatActivity() {
 
     private lateinit var viewModel: GameViewModel
     private lateinit var connManager: ConnectionManager
     private lateinit var gameEngine: GameEngine
+    private lateinit var boardView: BoardView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,15 +31,22 @@ class GameActivity : AppCompatActivity() {
 
         val resultView : TextView = findViewById(R.id.result_display)
         resultView.text = Stats.getDisplayString()
+        boardView = findViewById(R.id.board)
 
-        for (i in 1..10) {
-            viewModel.sendData("Hello: $i")
-        }
+        init()
+        gameEngine.readyToPlay()
     }
 
     fun init() {
         // mostly move this to viewModel
-        gameEngine = GameEngine(Player())
-        val remoteEngine = RemoteGameEngineProxy(connManager)
+        val playerName = intent.getStringExtra(KEY_PLAYER_NAME) ?: "You"
+        val playerType = intent.getStringExtra(KEY_PLAYER_TYPE) ?: return // Kill game if this happens
+        gameEngine = GameEngine(
+            Player(playerName, if (playerType == "Host") Piece.WHITE else Piece.BLACK),
+            RemoteGameEngineProxy(connManager),
+            boardView
+        )
     }
 }
+
+const val KEY_PLAYER_TYPE = "com.ooad.gomoku.KEY_PLAYER_TYPE"

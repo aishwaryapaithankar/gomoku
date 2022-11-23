@@ -1,5 +1,6 @@
 package com.ooad.gomoku.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -62,6 +63,9 @@ class HostActivity : AppCompatActivity() {
     }
 
     private fun onConnected() {
-        // Open GameActivity
+        startActivity(Intent(this, GameActivity::class.java).apply {
+            putExtra(KEY_PLAYER_NAME, serverName)
+            putExtra(KEY_PLAYER_TYPE, "Host")
+        })
     }
 }

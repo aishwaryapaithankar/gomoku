@@ -74,7 +74,7 @@ class ConnectionManager(context: Context) {
     }
 
     private fun listenForData() {
-        var data: String
+        var data: String?
         while (true) {
             try {
                 data = reader.readLine()
@@ -82,11 +82,11 @@ class ConnectionManager(context: Context) {
                     Log.i(TAG, "Received null or empty data")
                     break
                 }
-
+                Log.i(TAG, "Received data: ($data)")
                 processData(data)
-                Log.i(TAG, "Received data: $data")
             } catch (e: Exception) {
-                Log.e(TAG, "Handled Exception: ${e.message}")
+                Log.e(TAG, "Handled Exception: ${e.message}. Exiting listenForData")
+                break
             }
         }
     }

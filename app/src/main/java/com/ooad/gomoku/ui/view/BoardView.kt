@@ -10,18 +10,15 @@ import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import com.ooad.gomoku.R
+import com.ooad.gomoku.data.Move
+import com.ooad.gomoku.engine.Piece
 import kotlin.math.floor
 import kotlin.math.min
 
-enum class Piece {
-    NONE,
-    BLACK,
-    WHITE
-}
-
 class BoardView(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
-    private var boardSize: Int
+    var boardSize: Int
+        private set
     private var boardMeasure: Float
     private var boardLen: Int = 0
 
@@ -31,8 +28,8 @@ class BoardView(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
     private var logicalBoard: Array<Array<Piece>>
 
-    // debug - delete later
-    private var count = 0
+    lateinit var engineMoveCallback: (Move) -> Unit
+    lateinit var piece: Piece
 
     init {
         context.theme.obtainStyledAttributes(attrs, R.styleable.BoardView, 0, 0).apply {
@@ -130,8 +127,7 @@ class BoardView(context: Context, attrs: AttributeSet) : View(context, attrs) {
             if (x < 0 || x >= boardSize || y < 0 || y >= boardSize)
                 return true
 
-            count++
-            addPiece(x, y, if (count % 2 == 0) Piece.WHITE else Piece.BLACK)
+            engineMoveCallback(Move(x, y, 0, piece))
             return true
         }
     }

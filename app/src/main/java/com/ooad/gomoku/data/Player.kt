@@ -1,7 +1,7 @@
 package com.ooad.gomoku.data
 
-class Player {
-    private lateinit var name: String
-    private lateinit var color: String
+import com.ooad.gomoku.engine.Piece
+
+class Player(name: String, val color: Piece) {
     private var stats: Stats = Stats
 }
