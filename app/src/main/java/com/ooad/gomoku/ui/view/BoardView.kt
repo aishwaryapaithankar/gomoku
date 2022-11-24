@@ -53,6 +53,8 @@ class BoardView(context: Context, attrs: AttributeSet) : View(context, attrs) {
             strokeWidth = 2f
             style = Paint.Style.STROKE
         }
+        setBackgroundColor(resources.getColor(R.color.board_brown))
+
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -70,7 +72,7 @@ class BoardView(context: Context, attrs: AttributeSet) : View(context, attrs) {
             x += boardLen.toFloat() / boardSize
             // horizontal lines
             canvas.drawLine(0f, y, boardLen.toFloat(), y, blackPaint)
-            y  += boardLen.toFloat() / boardSize
+            y += boardLen.toFloat() / boardSize
         }
     }
 
@@ -117,7 +119,7 @@ class BoardView(context: Context, attrs: AttributeSet) : View(context, attrs) {
         return gestureDetector.onTouchEvent(event)
     }
 
-    private fun getBoardLocation(x: Float, y: Float) : Pair<Int, Int> {
+    private fun getBoardLocation(x: Float, y: Float): Pair<Int, Int> {
         val xIndex = floor(x / boardLen * boardSize)
         val yIndex = floor(y / boardLen * boardSize)
         Log.i(TAG, "xIndex=$xIndex, yIndex=$yIndex")

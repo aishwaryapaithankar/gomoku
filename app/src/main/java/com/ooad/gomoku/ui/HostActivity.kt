@@ -32,7 +32,8 @@ class HostActivity : AppCompatActivity() {
         createButton.setOnClickListener {
             findViewById<TextView>(R.id.wait_label).isVisible = true
             findViewById<ProgressBar>(R.id.progress_bar).isVisible = true
-            createButton.isEnabled = false
+            findViewById<TextView>(R.id.name_label).text = ""
+            createButton.isVisible = false
             findViewById<EditText>(R.id.input_name).apply {
                 isEnabled = false
                 serverName = text.toString()
