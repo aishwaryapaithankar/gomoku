@@ -9,9 +9,18 @@ enum class Piece {
     WHITE
 }
 
+enum class BoardState {
+    IN_PROGRESS,
+    WHITE_WON,
+    BLACK_WON,
+    DRAW
+}
+
 class Board(private val boardView: BoardView) {
     private var logicalBoard: Array<Array<Piece>>
     private val boardSize: Int = boardView.boardSize
+
+    var boardState: BoardState = BoardState.IN_PROGRESS
 
     init {
         logicalBoard = Array(boardSize) { Array(boardSize) { Piece.NONE } }
@@ -20,9 +29,79 @@ class Board(private val boardView: BoardView) {
     private fun isValidMove(move: Move) : Boolean = logicalBoard[move.row][move.col] == Piece.NONE
 
     fun addPiece(move: Move) : Boolean = if (isValidMove(move)) {
+        logicalBoard[move.row][move.col] = move.piece
         boardView.addPiece(move.row, move.col, move.piece)
+        boardState = getBoardState(move)
         true
     } else {
         false
+    }
+
+    private fun getStateFromPiece(piece: Piece) : BoardState = if (piece == Piece.WHITE) {
+        BoardState.WHITE_WON
+    } else {
+        BoardState.BLACK_WON
+    }
+
+    private fun inBounds(x: Int, y: Int): Boolean = x in 0 until boardSize && y in 0 until boardSize
+
+    private fun getBoardState(move: Move): BoardState {
+        val (x, y, piece) = move
+        for (i in -4..0) {
+            val r = x + i
+            val c = y + i
+            var found = true
+            for (j in 0..4) {
+                if (!inBounds(r+j, c+j) || logicalBoard[r+j][c+j] != piece) {
+                    found = false
+                    break
+                }
+            }
+            if (found) return getStateFromPiece(piece)
+        }
+
+        for (i in 4 downTo 0) {
+            val r = x + i
+            val c = y - i
+            var found = true
+            for (j in 0..4) {
+                if (!inBounds(r-j, c+j) || logicalBoard[r-j][c+j] != piece) {
+                    found = false
+                    break
+                }
+            }
+            if (found) return getStateFromPiece(piece)
+        }
+
+        for (i in -4..0) {
+            val r = x + i
+            var found = true
+            for (j in 0..4) {
+                if (!inBounds(r+j, y) || logicalBoard[r+j][y] != piece) {
+                    found = false
+                    break
+                }
+            }
+            if (found) return getStateFromPiece(piece)
+        }
+
+        for (i in -4..0) {
+            val c = y + i
+            var found = true
+            for (j in 0..4) {
+                if (!inBounds(x, c+j) || logicalBoard[x][c+j] != piece) {
+                    found = false
+                    break
+                }
+            }
+            if (found) return getStateFromPiece(piece)
+        }
+
+        for (row in logicalBoard) {
+            if (row.contains(Piece.NONE))
+                return BoardState.IN_PROGRESS
+        }
+
+        return BoardState.DRAW
     }
 }

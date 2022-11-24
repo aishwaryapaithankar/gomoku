@@ -29,6 +29,8 @@ class GameEngine(player: Player, private val proxy: RemoteGameEngineProxy, board
     private var state: State
     private val uiHandler = Handler(Looper.getMainLooper())
 
+    lateinit var onGameTerminated: (BoardState) -> Unit
+
     init {
         publisher.registerObserver(StatSaver())
         boardView.piece = player.color
@@ -50,6 +52,7 @@ class GameEngine(player: Player, private val proxy: RemoteGameEngineProxy, board
         if (state.move(move)) {
             Log.i(TAG, "Successful move: $move")
             proxy.move(move)
+            checkAndDisplayResult()
         }
     }
 
@@ -58,7 +61,14 @@ class GameEngine(player: Player, private val proxy: RemoteGameEngineProxy, board
             Log.i(TAG, "Received remote move: $move")
             if (state.move(move)) {
                 Log.i(TAG, "Successful remote move: $move")
+                checkAndDisplayResult()
             }
+        }
+    }
+
+    private fun checkAndDisplayResult() {
+        if (board.boardState != BoardState.IN_PROGRESS) {
+            onGameTerminated(board.boardState)
         }
     }
 }

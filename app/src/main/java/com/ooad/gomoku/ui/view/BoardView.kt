@@ -127,7 +127,7 @@ class BoardView(context: Context, attrs: AttributeSet) : View(context, attrs) {
             if (x < 0 || x >= boardSize || y < 0 || y >= boardSize)
                 return true
 
-            engineMoveCallback(Move(x, y, 0, piece))
+            engineMoveCallback(Move(x, y, piece))
             return true
         }
     }

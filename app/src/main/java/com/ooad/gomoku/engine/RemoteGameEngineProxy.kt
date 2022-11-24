@@ -8,9 +8,13 @@ class RemoteGameEngineProxy(private val connManager: ConnectionManager) : Engine
     lateinit var engineMoveCallback : (Move) -> Unit
 
     init {
-        connManager.moveCallback = { data ->
-            val move = Move.from(data)
-            engineMoveCallback(move)
+        connManager.dataCallback = { data ->
+            when {
+                data.startsWith("move") -> {
+                    val move = Move.from(data)
+                    engineMoveCallback(move)
+                }
+            }
         }
     }
 

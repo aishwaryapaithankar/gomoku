@@ -1,5 +1,6 @@
 package com.ooad.gomoku.ui
 
+import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
@@ -8,6 +9,7 @@ import com.ooad.gomoku.GomokuApp
 import com.ooad.gomoku.R
 import com.ooad.gomoku.data.Player
 import com.ooad.gomoku.data.Stats
+import com.ooad.gomoku.engine.BoardState
 import com.ooad.gomoku.engine.GameEngine
 import com.ooad.gomoku.engine.Piece
 import com.ooad.gomoku.engine.RemoteGameEngineProxy
@@ -34,10 +36,11 @@ class GameActivity : AppCompatActivity() {
         boardView = findViewById(R.id.board)
 
         init()
+        gameEngine.onGameTerminated = ::onGameTerminated
         gameEngine.readyToPlay()
     }
 
-    fun init() {
+    private fun init() {
         // mostly move this to viewModel
         val playerName = intent.getStringExtra(KEY_PLAYER_NAME) ?: "You"
         val playerType = intent.getStringExtra(KEY_PLAYER_TYPE) ?: return // Kill game if this happens
@@ -46,6 +49,19 @@ class GameActivity : AppCompatActivity() {
             RemoteGameEngineProxy(connManager),
             boardView
         )
+    }
+
+    private fun onGameTerminated(boardState: BoardState) {
+        AlertDialog.Builder(this)
+            .setMessage(
+                when (boardState) {
+                    BoardState.WHITE_WON -> "WHITE WON"
+                    BoardState.BLACK_WON -> "BLACK WON"
+                    else -> "DRAW"
+                }
+            ).setPositiveButton("OK") { _, _ ->
+                // Do nothing
+            }.create().show()
     }
 }
 
