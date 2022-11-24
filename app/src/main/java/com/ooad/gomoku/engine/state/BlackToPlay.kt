@@ -13,9 +13,9 @@ class BlackToPlay(private val engine: GameEngine, private val board: Board) : St
 
         return if (board.addPiece(move)) {
             if (board.boardState == BoardState.IN_PROGRESS)
-                engine.changeState(StateEnum.WHITE_TO_PLAY)
+                engine.changeState(States.WHITE_TO_PLAY)
             else
-                engine.changeState(StateEnum.TERMINATED)
+                engine.changeState(States.TERMINATED)
             true
         } else {
             false

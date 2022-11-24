@@ -1,51 +1,14 @@
 package com.ooad.gomoku.data
 
-import android.content.Context
-import java.io.File
-import java.lang.Integer.parseInt
+open class Stats(var won: Int, var lost: Int, var drawn: Int, var total: Int) {
+    constructor() : this(0, 0, 0, 0)
 
-enum class GameResult {
-    WON,
-    LOSE,
-    DRAW
-}
+    override fun toString(): String = "$won,$lost,$drawn,$total"
 
-object Stats {
-    private lateinit var file: File
-    private var won: Int = 0
-    private var lost: Int = 0
-    private var total: Int = 0
-    private var drawn: Int = 0
-
-    fun init(context: Context) {
-        createFileIfNotExists(context)
-
-        val content = file.readText().split(",").map { content -> parseInt(content.trim()) }
-        won = content[0]
-        lost = content[1]
-        total = content[2]
-        drawn = content[3]
-    }
-
-    private fun createFileIfNotExists(context: Context) {
-        file = File(context.filesDir, "stats.csv")
-        val notExists: Boolean = file.createNewFile()
-        if (notExists) {
-            file.writeText("0,0,0,0")
+    companion object {
+        fun from(stats: String): Stats {
+            val (won, lost, drawn, total) = stats.split(",").map { content -> Integer.parseInt(content.trim()) }
+            return Stats(won, lost, drawn, total)
         }
     }
-
-    fun update(result: GameResult) {
-        when (result) {
-            GameResult.WON -> won++
-            GameResult.LOSE -> lost++
-            GameResult.DRAW -> drawn++
-        }
-        total++
-        file.writeText(getFormattedString())
-    }
-
-    private fun getFormattedString(): String = "$won,$lost,$total,$drawn"
-
-    fun getDisplayString(): String = "Won:$won,Lost:$lost,Drawn:$drawn,Total:$total"
 }

@@ -28,7 +28,7 @@ class BoardView(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
     private var logicalBoard: Array<Array<Piece>>
 
-    lateinit var engineMoveCallback: (Move) -> Unit
+    lateinit var onMove: (Move) -> Unit
     lateinit var piece: Piece
 
     init {
@@ -105,6 +105,14 @@ class BoardView(context: Context, attrs: AttributeSet) : View(context, attrs) {
         boardLen = min(w, h)
     }
 
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        val w = MeasureSpec.getSize(widthMeasureSpec)
+        val h = MeasureSpec.getSize(heightMeasureSpec)
+        Log.i(TAG, "onMeasure: w=$w, h=$h")
+        val dim = min(w, h)
+        setMeasuredDimension(dim, dim)
+    }
+
     override fun onTouchEvent(event: MotionEvent): Boolean {
         return gestureDetector.onTouchEvent(event)
     }
@@ -127,7 +135,7 @@ class BoardView(context: Context, attrs: AttributeSet) : View(context, attrs) {
             if (x < 0 || x >= boardSize || y < 0 || y >= boardSize)
                 return true
 
-            engineMoveCallback(Move(x, y, piece))
+            onMove(Move(x, y, piece))
             return true
         }
     }

@@ -1,10 +1,10 @@
 package com.ooad.gomoku.observer
 
 import com.ooad.gomoku.data.GameResult
-import com.ooad.gomoku.data.Stats
+import com.ooad.gomoku.data.MyStats
 
 class StatSaver : Observer {
     override fun notify(result: GameResult) {
-        Stats.update(result)
+        MyStats.update(result)
     }
 }

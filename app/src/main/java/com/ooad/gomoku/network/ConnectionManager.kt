@@ -22,7 +22,7 @@ class ConnectionManager(context: Context) {
     private lateinit var reader: BufferedReader
 
     lateinit var serverDiscoveredCallback: (String) -> Unit
-    lateinit var dataCallback: (String) -> Unit
+    lateinit var onData: (String) -> Unit
 
     private fun initializeServerSocket(onConnected: () -> Unit) {
         if (serverSocket != null)
@@ -68,7 +68,7 @@ class ConnectionManager(context: Context) {
     }
 
     private fun processData(data: String) {
-        dataCallback(data)
+        onData(data)
     }
 
     private fun listenForData() {

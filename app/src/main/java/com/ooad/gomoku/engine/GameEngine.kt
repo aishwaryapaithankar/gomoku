@@ -10,41 +10,41 @@ import com.ooad.gomoku.observer.ResultPublisher
 import com.ooad.gomoku.observer.StatSaver
 import com.ooad.gomoku.ui.view.BoardView
 
-enum class StateEnum {
+enum class States {
     INIT,
     WHITE_TO_PLAY,
     BLACK_TO_PLAY,
     TERMINATED
 }
 
-class GameEngine(player: Player, private val proxy: RemoteGameEngineProxy, boardView: BoardView) : EngineInterface {
+class GameEngine(private val proxy: RemoteGameEngineProxy, private val boardView: BoardView) : EngineInterface {
     private val publisher = ResultPublisher
     private val board = Board(boardView)
     private val states = mapOf(
-        StateEnum.INIT to Init(),
-        StateEnum.WHITE_TO_PLAY to WhiteToPlay(this, board),
-        StateEnum.BLACK_TO_PLAY to BlackToPlay(this, board),
-        StateEnum.TERMINATED to Terminated()
+        States.INIT to Init(),
+        States.WHITE_TO_PLAY to WhiteToPlay(this, board),
+        States.BLACK_TO_PLAY to BlackToPlay(this, board),
+        States.TERMINATED to Terminated()
     )
-    private var state: State
+    private var state: State = states[States.INIT]!!
     private val uiHandler = Handler(Looper.getMainLooper())
 
     lateinit var onGameTerminated: (BoardState) -> Unit
+    private lateinit var player: Player
 
     init {
         publisher.registerObserver(StatSaver())
-        boardView.piece = player.color
-        boardView.engineMoveCallback = ::move
-        proxy.engineMoveCallback = ::remoteMove
-        state = states[StateEnum.INIT]!!
+        boardView.onMove = ::move
+        proxy.onMove = ::remoteMove
+        proxy.onPlayer = ::remotePlayer
     }
 
     fun readyToPlay() {
-        changeState(StateEnum.WHITE_TO_PLAY)
+        changeState(States.WHITE_TO_PLAY)
     }
 
-    fun changeState(stateEnum: StateEnum) {
-        state = states[stateEnum]!!
+    fun changeState(state: States) {
+        this.state = states[state]!!
     }
 
     override fun move(move: Move) {
@@ -64,6 +64,16 @@ class GameEngine(player: Player, private val proxy: RemoteGameEngineProxy, board
                 checkAndDisplayResult()
             }
         }
+    }
+
+    override fun setPlayer(player: Player) {
+        this.player = player
+        boardView.piece = player.color
+        proxy.setPlayer(player)
+    }
+
+    private fun remotePlayer(player: Player) {
+
     }
 
     private fun checkAndDisplayResult() {
