@@ -3,6 +3,8 @@ package com.ooad.gomoku.ui
 import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.lifecycle.ViewModelProvider
 import com.ooad.gomoku.GomokuApp
 import com.ooad.gomoku.R
@@ -60,7 +62,9 @@ class GameActivity : AppCompatActivity() {
 
     private fun onRemotePlayerInfo(player: Player) {
         val remotePlayerView = findViewById<PlayerInfoComponent>(R.id.remote_player)
-        setPlayerInfo(remotePlayerView, player)
+        Handler(Looper.getMainLooper()).post {
+            setPlayerInfo(remotePlayerView, player)
+        }
     }
 
     private fun setPlayerInfo(component: PlayerInfoComponent, player: Player) {
