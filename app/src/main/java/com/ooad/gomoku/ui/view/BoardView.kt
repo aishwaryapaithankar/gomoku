@@ -47,7 +47,7 @@ class BoardView(context: Context, attrs: AttributeSet) : View(context, attrs) {
             color = Color.BLACK
             strokeWidth = 3f
         }
-        whitePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.WHITE }
+        whitePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = resources.getColor(R.color.stone_white) }
         blackBorderPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             color = Color.BLACK
             strokeWidth = 2f

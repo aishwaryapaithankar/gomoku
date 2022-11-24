@@ -3,11 +3,19 @@ package com.ooad.gomoku.ui.view
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.ooad.gomoku.R
 
 class PlayerInfoComponent(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
+
+    private lateinit var colorImageView: ImageView
+    var imageResource: Int = 0
+        set(value) {
+            field = value
+            colorImageView.setImageResource(imageResource)
+        }
 
     private lateinit var nameTextView: TextView
     var playerName: String = String()
@@ -20,14 +28,14 @@ class PlayerInfoComponent(context: Context, attrs: AttributeSet) : LinearLayout(
     var gamesWon: Int = 0
         set(value) {
             field = value
-            wonTextView.text = value.toString()
+            wonTextView.text = "Won: $value"
         }
 
     private lateinit var lostTextView: TextView
     var gamesLost: Int = 0
         set(value) {
             field = value
-            lostTextView.text = value.toString()
+            lostTextView.text = "Lost: $value"
         }
 
     private lateinit var drawnTextView: TextView
@@ -46,8 +54,9 @@ class PlayerInfoComponent(context: Context, attrs: AttributeSet) : LinearLayout(
 
     override fun onFinishInflate() {
         super.onFinishInflate()
-        nameTextView = findViewById<TextView>(R.id.player_name_tv)
-        wonTextView = findViewById<TextView>(R.id.games_won_tv)
-        lostTextView = findViewById<TextView>(R.id.games_lost_tv)
+        colorImageView = findViewById(R.id.color_image)
+        nameTextView = findViewById(R.id.player_name_tv)
+        wonTextView = findViewById(R.id.games_won_tv)
+        lostTextView = findViewById(R.id.games_lost_tv)
     }
 }

@@ -31,9 +31,6 @@ class GameActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this)[GameViewModel::class.java]
         viewModel.connManager = connManager
 
-//        val resultView : TextView = findViewById(R.id.result_display)
-//        resultView.text = MyStats.getDisplayString()
-
         init()
         initViews()
         initGameEngine()
@@ -49,19 +46,32 @@ class GameActivity : AppCompatActivity() {
     private fun initViews() {
         boardView = findViewById(R.id.board)
 
-        val remotePlayerView = findViewById<PlayerInfoComponent>(R.id.remote_player)
-        remotePlayerView.playerName = "Other"
         val currentPlayerView = findViewById<PlayerInfoComponent>(R.id.current_player)
-        currentPlayerView.playerName = player.name
-        currentPlayerView.gamesWon = 34
-        currentPlayerView.gamesLost = 11
+        setPlayerInfo(currentPlayerView, player)
     }
 
     private fun initGameEngine() {
         gameEngine = GameEngine(RemoteGameEngineProxy(connManager), boardView)
+        gameEngine.onRemotePlayer = ::onRemotePlayerInfo
         gameEngine.onGameTerminated = ::onGameTerminated
         gameEngine.setPlayer(player)
         gameEngine.readyToPlay()
+    }
+
+    private fun onRemotePlayerInfo(player: Player) {
+        val remotePlayerView = findViewById<PlayerInfoComponent>(R.id.remote_player)
+        setPlayerInfo(remotePlayerView, player)
+    }
+
+    private fun setPlayerInfo(component: PlayerInfoComponent, player: Player) {
+        component.imageResource = if (player.color == Piece.WHITE) {
+            R.drawable.white_stone
+        } else {
+            R.drawable.black_stone
+        }
+        component.playerName = player.name
+        component.gamesWon = player.stats.won
+        component.gamesLost = player.stats.lost
     }
 
     private fun onGameTerminated(boardState: BoardState) {

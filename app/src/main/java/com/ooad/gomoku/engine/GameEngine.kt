@@ -30,6 +30,7 @@ class GameEngine(private val proxy: RemoteGameEngineProxy, private val boardView
     private val uiHandler = Handler(Looper.getMainLooper())
 
     lateinit var onGameTerminated: (BoardState) -> Unit
+    lateinit var onRemotePlayer: (Player) -> Unit
     private lateinit var player: Player
 
     init {
@@ -73,7 +74,7 @@ class GameEngine(private val proxy: RemoteGameEngineProxy, private val boardView
     }
 
     private fun remotePlayer(player: Player) {
-
+        onRemotePlayer(player)
     }
 
     private fun checkAndDisplayResult() {
