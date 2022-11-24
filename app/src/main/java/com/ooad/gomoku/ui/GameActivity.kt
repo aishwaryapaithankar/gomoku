@@ -1,11 +1,14 @@
 package com.ooad.gomoku.ui
 
-import android.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.Gravity
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.ooad.gomoku.GomokuApp
 import com.ooad.gomoku.R
 import com.ooad.gomoku.data.Player
@@ -41,7 +44,8 @@ class GameActivity : AppCompatActivity() {
     private fun init() {
         // mostly move this to viewModel
         val playerName = intent.getStringExtra(KEY_PLAYER_NAME) ?: "You"
-        val playerType = intent.getStringExtra(KEY_PLAYER_TYPE) ?: return // Kill game if this happens
+        val playerType =
+            intent.getStringExtra(KEY_PLAYER_TYPE) ?: return // Kill game if this happens
         player = Player(playerName, if (playerType == "Host") Piece.WHITE else Piece.BLACK)
     }
 
@@ -79,7 +83,8 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun onGameTerminated(boardState: BoardState) {
-        AlertDialog.Builder(this)
+        val dialog = MaterialAlertDialogBuilder(this)
+            .setTitle("Game Terminated!")
             .setMessage(
                 when (boardState) {
                     BoardState.WHITE_WON -> "WHITE WON"
@@ -88,7 +93,13 @@ class GameActivity : AppCompatActivity() {
                 }
             ).setPositiveButton("OK") { _, _ ->
                 // Do nothing
-            }.create().show()
+            }.create()
+        dialog.show()
+        dialog.findViewById<TextView>(android.R.id.message)!!.apply {
+            textSize = 20f
+            setTextColor(ContextCompat.getColor(this@GameActivity, R.color.dark_brown))
+            gravity = Gravity.CENTER
+        }
     }
 }
 
