@@ -30,14 +30,19 @@ class HostActivity : AppCompatActivity() {
 
         val createButton = findViewById<Button>(R.id.create_game_button)
         createButton.setOnClickListener {
+            val nameEditText = findViewById<EditText>(R.id.input_name).apply {
+                isEnabled = false
+                serverName = text.toString()
+            }
+            if (serverName.isNullOrEmpty()) {
+                nameEditText.isEnabled = true
+                return@setOnClickListener
+            }
+
             findViewById<TextView>(R.id.wait_label).isVisible = true
             findViewById<ProgressBar>(R.id.progress_bar).isVisible = true
             findViewById<TextView>(R.id.name_label).text = ""
             createButton.isVisible = false
-            findViewById<EditText>(R.id.input_name).apply {
-                isEnabled = false
-                serverName = text.toString()
-            }
 
             connManager.initServer(serverName!!, ::onConnected)
         }

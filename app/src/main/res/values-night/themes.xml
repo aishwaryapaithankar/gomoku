@@ -10,10 +10,11 @@
         <item name="colorSecondaryVariant">@color/dark_brown</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <!--        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>-->
-        <item name="android:statusBarColor">@color/dark_brown</item>
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
+<!--        <item name="android:statusBarColor">@color/dark_brown</item>-->
         <item name="android:colorBackground">@color/light_yellow</item>
         <item name="android:fontFamily">Roboto</item>
         <!-- Customize your theme here. -->
+        <item name="actionBarStyle">@style/Widget.MaterialComponents.ActionBar.Primary</item>
     </style>
 </resources>
