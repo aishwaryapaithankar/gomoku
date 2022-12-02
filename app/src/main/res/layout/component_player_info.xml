@@ -3,19 +3,22 @@
 
     <ImageView
         android:id="@+id/color_image"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
+        android:layout_width="64dp"
+        android:layout_height="64dp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp">
 
         <TextView
             android:id="@+id/player_name_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <LinearLayout

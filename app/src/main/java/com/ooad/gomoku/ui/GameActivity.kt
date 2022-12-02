@@ -31,6 +31,7 @@ class GameActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
+        supportActionBar?.hide()
 
         connManager = (application as GomokuApp).connManager
         viewModel = ViewModelProvider(this)[GameViewModel::class.java]

@@ -89,8 +89,9 @@ class ConnectionManager(context: Context) {
         }
     }
 
-    fun sendData(data: String) = CoroutineScope(Dispatchers.IO).launch {
+    fun sendData(data: String, delayMillis: Long = 0) = CoroutineScope(Dispatchers.IO).launch {
         Log.i(TAG, "sending data: $data")
+        if (delayMillis > 0) delay(delayMillis)
         writer.println(data)
     }
 

@@ -23,6 +23,7 @@ class RemoteGameEngineProxy(private val connManager: ConnectionManager) : Engine
     }
 
     override fun setPlayer(player: Player) {
-        connManager.sendData(player.toString())
+        // delay to enable peer's RemoteGameEngineProxy setup
+        connManager.sendData(player.toString(), 500)
     }
 }
