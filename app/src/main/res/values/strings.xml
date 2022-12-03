@@ -5,4 +5,5 @@
     <string name="name_label">Enter Player Name</string>
     <string name="host_wait">Waiting for other player to join</string>
     <string name="join_wait">Searching for available games</string>
+    <string name="exit">Exit</string>
 </resources>

@@ -107,6 +107,7 @@ class JoinAvailableGameFragment : Fragment() {
                 putExtra(KEY_PLAYER_NAME, playerName)
                 putExtra(KEY_PLAYER_TYPE, "Peer")
             })
+            requireActivity().finish()
         }
     }
 }

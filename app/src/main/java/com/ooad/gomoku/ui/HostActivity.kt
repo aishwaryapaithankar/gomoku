@@ -73,5 +73,6 @@ class HostActivity : AppCompatActivity() {
             putExtra(KEY_PLAYER_NAME, serverName)
             putExtra(KEY_PLAYER_TYPE, "Host")
         })
+        finish()
     }
 }

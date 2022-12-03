@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.Gravity
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -51,6 +52,7 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
+        findViewById<Button>(R.id.exit_button).setOnClickListener { finish() }
         boardView = findViewById(R.id.board)
 
         val currentPlayerView = findViewById<PlayerInfoComponent>(R.id.current_player)
