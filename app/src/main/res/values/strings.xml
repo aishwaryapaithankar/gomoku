@@ -8,4 +8,5 @@
     <string name="host_wait">Waiting for other player to join</string>
     <string name="join_wait">Searching for available games</string>
     <string name="exit">Exit</string>
+    <string name="available_games">Available Games</string>
 </resources>
