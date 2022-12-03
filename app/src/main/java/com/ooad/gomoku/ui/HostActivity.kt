@@ -2,6 +2,7 @@ package com.ooad.gomoku.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -11,6 +12,8 @@ import com.google.android.material.textfield.TextInputLayout
 import com.ooad.gomoku.GomokuApp
 import com.ooad.gomoku.R
 import com.ooad.gomoku.network.ConnectionManager
+import com.skyfishjy.library.RippleBackground
+
 
 class HostActivity : AppCompatActivity() {
 
@@ -40,7 +43,9 @@ class HostActivity : AppCompatActivity() {
             }
 
             findViewById<TextView>(R.id.wait_label).isVisible = true
-            findViewById<ProgressBar>(R.id.progress_bar).isVisible = true
+            findViewById<ProgressBar>(R.id.loadImage).isVisible = true
+            val rippleBackground = findViewById<View>(R.id.rippleBG) as RippleBackground
+            rippleBackground.startRippleAnimation();
             findViewById<TextView>(R.id.name_label).text = ""
             createButton.isVisible = false
 

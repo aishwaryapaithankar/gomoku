@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.ooad.gomoku.GomokuApp
 import com.ooad.gomoku.R
 import com.ooad.gomoku.network.ConnectionManager
+import com.skyfishjy.library.RippleBackground
 
 class JoinAvailableGameFragment : Fragment() {
 
@@ -48,8 +49,6 @@ class JoinAvailableGameFragment : Fragment() {
         viewModel = ViewModelProvider(this)[JoinAvailableGameViewModel::class.java]
         viewModel.connManager = connManager
 
-        Toast.makeText(requireActivity(), "Player Name $playerName", Toast.LENGTH_SHORT).show()
-
         val listview: ListView? = getView()?.findViewById(R.id.games_list)
         gamesListAdapter =
             ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, games)
@@ -63,6 +62,8 @@ class JoinAvailableGameFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
+        val rippleBackground = getView()?.findViewById<View>(R.id.ripple) as RippleBackground
+        rippleBackground.startRippleAnimation();
     }
 
     override fun onResume() {
