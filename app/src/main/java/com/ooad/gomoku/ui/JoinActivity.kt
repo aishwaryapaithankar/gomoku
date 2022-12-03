@@ -10,7 +10,7 @@ class JoinActivity : AppCompatActivity() {
         setContentView(R.layout.activity_join)
         supportActionBar?.run {
             setDisplayHomeAsUpEnabled(true)
-            title = "Join Game"
+            title = getString(R.string.join_game)
         }
 
         if (savedInstanceState == null) {
@@ -19,8 +19,8 @@ class JoinActivity : AppCompatActivity() {
         }
     }
 
-//    override fun onSupportNavigateUp(): Boolean {
-//        finish()
-//        return true
-//    }
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        return true
+    }
 }

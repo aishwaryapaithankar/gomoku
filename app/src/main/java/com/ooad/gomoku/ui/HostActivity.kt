@@ -22,7 +22,7 @@ class HostActivity : AppCompatActivity() {
         setContentView(R.layout.activity_host)
         supportActionBar?.run {
             setDisplayHomeAsUpEnabled(true)
-            title = "Host Game"
+            title = getString(R.string.host_game)
         }
 
         connManager = ConnectionManager(this)
