@@ -8,7 +8,6 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.ooad.gomoku.GomokuApp
 import com.ooad.gomoku.R
@@ -23,7 +22,6 @@ import com.ooad.gomoku.ui.view.PlayerInfoComponent
 
 class GameActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: GameViewModel
     private lateinit var connManager: ConnectionManager
     private lateinit var gameEngine: GameEngine
     private lateinit var boardView: BoardView
@@ -35,8 +33,6 @@ class GameActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         connManager = (application as GomokuApp).connManager
-        viewModel = ViewModelProvider(this)[GameViewModel::class.java]
-        viewModel.connManager = connManager
 
         init()
         initViews()

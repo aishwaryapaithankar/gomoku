@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.textfield.TextInputLayout
 import com.ooad.gomoku.R
 
 class JoinGameFragment : Fragment() {
@@ -31,7 +31,8 @@ class JoinGameFragment : Fragment() {
         viewModel = ViewModelProvider(this)[JoinGameViewModel::class.java]
 
         getView()?.findViewById<Button>(R.id.join_button)?.setOnClickListener {
-            val playerName = getView()?.findViewById<EditText>(R.id.input_name)?.text.toString()
+            val playerName =
+                getView()?.findViewById<TextInputLayout>(R.id.input_name)?.editText?.text.toString()
             val availableGameFragment =
                 JoinAvailableGameFragment.newInstance(bundleOf(KEY_PLAYER_NAME to playerName))
             requireActivity().supportFragmentManager.beginTransaction()

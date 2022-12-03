@@ -11,6 +11,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         supportActionBar?.hide()
+        window.statusBarColor = getColor(R.color.light_yellow)
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()

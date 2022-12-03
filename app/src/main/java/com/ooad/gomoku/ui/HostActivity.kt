@@ -2,13 +2,12 @@ package com.ooad.gomoku.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import com.google.android.material.textfield.TextInputLayout
 import com.ooad.gomoku.GomokuApp
 import com.ooad.gomoku.R
 import com.ooad.gomoku.network.ConnectionManager
@@ -31,9 +30,9 @@ class HostActivity : AppCompatActivity() {
 
         val createButton = findViewById<Button>(R.id.create_game_button)
         createButton.setOnClickListener {
-            val nameEditText = findViewById<EditText>(R.id.input_name).apply {
+            val nameEditText = findViewById<TextInputLayout>(R.id.input_name).apply {
                 isEnabled = false
-                serverName = text.toString()
+                serverName = editText?.text.toString()
             }
             if (serverName.isNullOrEmpty()) {
                 nameEditText.isEnabled = true

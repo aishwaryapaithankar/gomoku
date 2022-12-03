@@ -2,7 +2,9 @@
     <string name="app_name">GOMOKU</string>
     <string name="host_game">Host Game</string>
     <string name="join_game">Join Game</string>
+    <string name="create_game">Create Game</string>
     <string name="name_label">Enter Player Name</string>
+    <string name="name_hint">Player Name</string>
     <string name="host_wait">Waiting for other player to join</string>
     <string name="join_wait">Searching for available games</string>
     <string name="exit">Exit</string>
