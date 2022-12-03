@@ -2,6 +2,7 @@ package com.ooad.gomoku.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
@@ -50,6 +51,10 @@ class HostActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        if (intent.getBooleanExtra(KEY_GAME_STARTED, false)) {
+            finish()
+            return
+        }
         serverName?.apply { connManager.initServer(this, ::onConnected) }
     }
 
@@ -73,6 +78,6 @@ class HostActivity : AppCompatActivity() {
             putExtra(KEY_PLAYER_NAME, serverName)
             putExtra(KEY_PLAYER_TYPE, "Host")
         })
-        finish()
+        intent.putExtra(KEY_GAME_STARTED, true)
     }
 }

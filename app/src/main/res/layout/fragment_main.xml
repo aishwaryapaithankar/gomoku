@@ -7,19 +7,10 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="-16dp"
-        tools:layout_editor_absoluteY="-234dp">
-
         <TextView
             android:id="@+id/game_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="116dp"
-            android:fontFamily="monospace"
-            android:rotation="0"
             android:shadowColor="@color/black"
             android:shadowDx="5"
             android:shadowDy="5"
@@ -29,62 +20,62 @@
             android:textColor="@color/dark_brown"
             android:textSize="60sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:paddingVertical="80dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/button_container"
+            app:layout_constraintVertical_weight="1" />
 
-        <Button
-            android:id="@+id/join_button"
-            style="@style/Widget.Material3.Button.ElevatedButton.Icon"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/button_container"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="44dp"
-            android:backgroundTint="@color/dark_brown"
-            android:elevation="20dp"
-            android:fontFamily="monospace"
-            android:padding="15dp"
-            android:text="Join Game"
-            android:textColor="@color/white"
-            android:textSize="17sp"
-            android:translationZ="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/host_game"
-            app:strokeColor="@color/black"
-            app:strokeWidth="1dp" />
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingVertical="32dp"
+            app:layout_constraintBottom_toTopOf="@id/image"
+            app:layout_constraintTop_toBottomOf="@id/game_title"
+            app:layout_constraintVertical_weight="1">
+            <!--<TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Hello!"/>-->
+            <Button
+                android:id="@+id/host_game"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/dark_brown"
+                android:paddingHorizontal="18dp"
+                android:paddingVertical="18dp"
+                android:text="@string/host_game"
+                android:textColor="@color/white"
+                android:textSize="17sp"
+                android:visibility="visible"
+                app:rippleColor="@color/stone_white" />
 
-        <Button
-            android:id="@+id/host_game"
-            style="@style/Widget.Material3.Button.ElevatedButton.Icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="26dp"
-            android:backgroundTint="@color/dark_brown"
-            android:elevation="20dp"
-            android:fontFamily="monospace"
-            android:padding="15dp"
-            android:text="@string/host_game"
-            android:textColor="@color/white"
-            android:textSize="17sp"
-            android:translationZ="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/game_title"
-            app:rippleColor="@color/black"
-            app:strokeWidth="1dp" />
+            <Button
+                android:id="@+id/join_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="@color/dark_brown"
+                android:paddingHorizontal="18dp"
+                android:paddingVertical="18dp"
+                android:text="@string/join_game"
+                android:textColor="@color/white"
+                android:textSize="17sp"
+                android:visibility="visible"
+                app:rippleColor="@color/stone_white" />
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/image"
-            android:layout_width="389dp"
-            android:layout_height="288dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
             android:src="@drawable/board"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/join_button"
-            app:layout_constraintVertical_bias="0.764" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintTop_toBottomOf="@+id/button_container"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintVertical_weight="1"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

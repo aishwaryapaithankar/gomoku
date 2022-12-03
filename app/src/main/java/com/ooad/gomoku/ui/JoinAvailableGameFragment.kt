@@ -67,6 +67,10 @@ class JoinAvailableGameFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        if (requireActivity().intent.getBooleanExtra(KEY_GAME_STARTED, false)) {
+            requireActivity().finish()
+            return
+        }
         searchGame()
     }
 
@@ -107,7 +111,7 @@ class JoinAvailableGameFragment : Fragment() {
                 putExtra(KEY_PLAYER_NAME, playerName)
                 putExtra(KEY_PLAYER_TYPE, "Peer")
             })
-            requireActivity().finish()
+            requireActivity().intent.putExtra(KEY_GAME_STARTED, true)
         }
     }
 }

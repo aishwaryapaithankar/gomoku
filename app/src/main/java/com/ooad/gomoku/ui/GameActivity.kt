@@ -107,3 +107,4 @@ class GameActivity : AppCompatActivity() {
 }
 
 const val KEY_PLAYER_TYPE = "com.ooad.gomoku.KEY_PLAYER_TYPE"
+const val KEY_GAME_STARTED = "com.ooad.gomoku.GAME_STARTED"
