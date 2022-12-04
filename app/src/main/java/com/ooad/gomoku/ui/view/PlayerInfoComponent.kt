@@ -39,9 +39,11 @@ class PlayerInfoComponent(context: Context, attrs: AttributeSet) : LinearLayout(
         }
 
     private lateinit var drawnTextView: TextView
-
-    private lateinit var totalTextView: TextView
-
+    var gamesDrawn: Int = 0
+        set(value) {
+            field = value
+            drawnTextView.text = "Drawn: $value"
+        }
 
     init {
         initViews(context)
@@ -58,5 +60,6 @@ class PlayerInfoComponent(context: Context, attrs: AttributeSet) : LinearLayout(
         nameTextView = findViewById(R.id.player_name_tv)
         wonTextView = findViewById(R.id.games_won_tv)
         lostTextView = findViewById(R.id.games_lost_tv)
+        drawnTextView = findViewById(R.id.games_drawn_tv)
     }
 }

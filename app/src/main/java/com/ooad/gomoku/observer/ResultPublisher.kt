@@ -20,5 +20,6 @@ object ResultPublisher {
 
     fun updateResult(gameResult: GameResult) {
         result = gameResult
+        notifyObservers()
     }
 }

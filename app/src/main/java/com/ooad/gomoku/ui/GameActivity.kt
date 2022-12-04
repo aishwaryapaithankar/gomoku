@@ -79,6 +79,7 @@ class GameActivity : AppCompatActivity() {
         component.playerName = player.name
         component.gamesWon = player.stats.won
         component.gamesLost = player.stats.lost
+        component.gamesDrawn = player.stats.drawn
     }
 
     private fun onGameTerminated(boardState: BoardState) {

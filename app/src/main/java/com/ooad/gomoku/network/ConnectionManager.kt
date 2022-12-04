@@ -11,8 +11,6 @@ import java.net.ServerSocket
 import java.net.Socket
 
 class ConnectionManager(context: Context) {
-    // Code borrowed and adapted from:
-    // https://developer.android.com/training/connect-devices-wirelessly/nsd
 
     private val nsdHelper: NsdHelper = NsdHelper(context)
     private var serverSocket: ServerSocket? = null

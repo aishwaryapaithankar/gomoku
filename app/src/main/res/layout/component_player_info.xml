@@ -21,21 +21,22 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/games_won_tv"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:textSize="12sp" />
 
-            <TextView
-                android:id="@+id/games_won_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp" />
+        <TextView
+            android:id="@+id/games_lost_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp" />
 
-            <TextView
-                android:id="@+id/games_lost_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/games_drawn_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp" />
     </LinearLayout>
 </merge>

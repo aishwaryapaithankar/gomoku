@@ -3,9 +3,11 @@ package com.ooad.gomoku.engine
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import com.ooad.gomoku.data.GameResult
 import com.ooad.gomoku.data.Move
 import com.ooad.gomoku.data.Player
 import com.ooad.gomoku.engine.state.*
+import com.ooad.gomoku.observer.Observer
 import com.ooad.gomoku.observer.ResultPublisher
 import com.ooad.gomoku.observer.StatSaver
 import com.ooad.gomoku.ui.view.BoardView
@@ -31,10 +33,11 @@ class GameEngine(private val proxy: RemoteGameEngineProxy, private val boardView
 
     lateinit var onGameTerminated: (BoardState) -> Unit
     lateinit var onRemotePlayer: (Player) -> Unit
-    private lateinit var player: Player
 
+    private lateinit var player: Player
+    private val resultObserver: Observer = StatSaver()
     init {
-        publisher.registerObserver(StatSaver())
+        publisher.registerObserver(resultObserver)
         boardView.onMove = ::move
         proxy.onMove = ::remoteMove
         proxy.onPlayer = ::remotePlayer
@@ -79,6 +82,15 @@ class GameEngine(private val proxy: RemoteGameEngineProxy, private val boardView
 
     private fun checkAndDisplayResult() {
         if (board.boardState != BoardState.IN_PROGRESS) {
+            publisher.updateResult(
+                when (board.boardState) {
+                    BoardState.WHITE_WON -> if (player.color == Piece.WHITE) GameResult.WON else GameResult.LOSE
+                    BoardState.BLACK_WON -> if (player.color == Piece.BLACK) GameResult.WON else GameResult.LOSE
+                    BoardState.DRAW -> GameResult.DRAW
+                    else -> GameResult.DRAW
+                }
+            )
+            publisher.removeObserver(resultObserver)
             onGameTerminated(board.boardState)
         }
     }
