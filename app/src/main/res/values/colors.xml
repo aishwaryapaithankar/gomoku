@@ -4,10 +4,11 @@
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
-    <color name="board_brown">#e4b14a</color>
+    <color name="board_brown">#EFD587</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="dark_brown">#C36C3920</color>
+    <color name="dark_brown_opaque">#6C3920</color>
     <color name="light_yellow">#f0ede4</color>
     <color name="stone_white">#ebe4d8</color>
     <color name="hint_grey">#FF454749</color>

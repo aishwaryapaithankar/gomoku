@@ -11,7 +11,7 @@
         android:id="@+id/game_title"
         android:layout_width="389dp"
         android:layout_height="288dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="130dp"
         android:src="@drawable/title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,15 +56,15 @@
                 app:rippleColor="@color/stone_white" />
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="12dp"
-            android:src="@drawable/board"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_container"
-            app:layout_constrainedHeight="true"
-            app:layout_constraintVertical_weight="1"/>
+<!--        <ImageView-->
+<!--            android:id="@+id/image"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginHorizontal="12dp"-->
+<!--            android:src="@drawable/board"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/button_container"-->
+<!--            app:layout_constrainedHeight="true"-->
+<!--            app:layout_constraintVertical_weight="1"/>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
