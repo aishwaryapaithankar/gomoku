@@ -1,5 +1,6 @@
 package com.ooad.gomoku.ui
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -50,8 +51,7 @@ class JoinAvailableGameFragment : Fragment() {
         viewModel.connManager = connManager
 
         val listview: ListView? = getView()?.findViewById(R.id.games_list)
-        gamesListAdapter =
-            ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, games)
+        gamesListAdapter = GamesListAdapter(requireActivity(), games)
         listview?.adapter = gamesListAdapter
         listview?.onItemClickListener =
             AdapterView.OnItemClickListener { adapterView, _, position, _ ->
@@ -63,7 +63,7 @@ class JoinAvailableGameFragment : Fragment() {
                 ).show()
             }
         val rippleBackground = getView()?.findViewById<View>(R.id.ripple) as RippleBackground
-        rippleBackground.startRippleAnimation();
+        rippleBackground.startRippleAnimation()
     }
 
     override fun onResume() {
@@ -113,6 +113,34 @@ class JoinAvailableGameFragment : Fragment() {
                 putExtra(KEY_PLAYER_TYPE, "Peer")
             })
             requireActivity().intent.putExtra(KEY_GAME_STARTED, true)
+        }
+    }
+}
+
+class GamesListAdapter(private val ctx: Activity, private val games: MutableList<String>) :
+    ArrayAdapter<String>(ctx, R.layout.material_list_item_single_line, games) {
+
+    class ViewHolder {
+        lateinit var image: ImageView
+        lateinit var name: TextView
+    }
+
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+        val viewHolder: ViewHolder
+        val conView: View
+        return if (convertView == null) {
+            viewHolder = ViewHolder()
+            conView = ctx.layoutInflater.inflate(R.layout.material_list_item_single_line, parent, false)
+            viewHolder.image = conView.findViewById(R.id.material_list_item_icon)
+            viewHolder.image.setImageResource(R.drawable.logo)
+            viewHolder.name = conView.findViewById(R.id.material_list_item_text)
+            viewHolder.name.text = games[position]
+            conView.tag = viewHolder
+            conView
+        } else {
+            viewHolder = convertView.tag as ViewHolder
+            viewHolder.name.text = games[position]
+            convertView
         }
     }
 }

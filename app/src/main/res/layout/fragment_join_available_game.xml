@@ -15,7 +15,8 @@
         android:textAlignment="center"
         android:textColor="@color/dark_brown"
         android:textSize="24sp"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <ListView
         android:id="@+id/games_list"
@@ -29,7 +30,7 @@
         android:id="@+id/searching_game_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="24dp"
         android:text="@string/join_wait"
         android:textAlignment="center"
         android:textColor="@color/dark_brown"
@@ -44,8 +45,8 @@
         android:id="@+id/ripple"
         app:rb_color="@color/dark_brown"
         app:rb_radius="25dp"
-        app:rb_rippleAmount="3"
-        app:rb_duration="3000"
+        app:rb_rippleAmount="4"
+        app:rb_duration="4000"
         app:rb_scale="6">
         <ImageView
             android:layout_width="64dp"
