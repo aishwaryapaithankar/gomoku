@@ -4,36 +4,31 @@
 
 Aishwarya Paithankar <br/>
 Varad Raut
-<br/><br/>
+<br/>
 
 ## Language Versions
 
-Kotlin Version: 1.6.10
+Kotlin Version: 1.6.10 <br/>
 Android: Android 9 (API level 28) Minimum
 
 ## Steps to run
-First, clone this repository. If you have `make` on your machine, build the code by executing
-```bash command
-make build
-``` 
-Then, to play the game:
-```bash command
-make run
-```
+First, clone this repository. If you have Android Studio installed on your machine, then just
+import the project into Android Studio, connect your device (or emulator) and run the application.
 
-If you don't have `make`, then you need to download the charting lib dependency. Follow these steps:
-1. Download the dependency [zip](https://knowm.org/downloads/xchart/xchart-3.8.2.zip).
-2. Extract &nbsp;```xchart-3.8.2.jar```&nbsp; from &nbsp;```xchart-3.8.2.zip```&nbsp;.
-3. Create a directory ```lib``` in the root of the project, and place the extracted jar in there.
-4. Next, build the project:
+If you don't have Android Studio, then you need at least JDK 1.8 (Java 8) installed on your machine
+and in our PATH. Or your JAVA_HOME environment variable should be set to the JAVA installation directory. <br/>
+Then, follow these steps:
+1. In the project root directory, execute
    ```bash command
-   javac --source-path src -d build -cp lib/xchart-3.8.2.jar src/RotLA.java
+   ./gradlew build
+   ./gradlew assemble
    ```
-
-5. Run
-   ```bash command
-   java -cp build:lib/xchart-3.8.2.jar -ea RotLA
+2. Connect your Android device (or emulator)
+3. Execute
+   ```shell
+   ./gradlew installDebug
    ```
+4. Open `GOMOKU` app on your device (or emulator)
 
 <br/>
 
