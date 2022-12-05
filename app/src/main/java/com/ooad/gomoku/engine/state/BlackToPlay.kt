@@ -4,6 +4,12 @@ import android.util.Log
 import com.ooad.gomoku.data.Move
 import com.ooad.gomoku.engine.*
 
+/*
+ * @Pattern (State Pattern)
+ *
+ * The BlackToPlay state implements the base State interface and overrides the move method to perform the BlackToPlay State move.
+ * In BlackToPlay state, only player with Black stone should be allowed to play.
+ */
 class BlackToPlay(private val engine: GameEngine, private val board: Board) : State {
     override fun move(move: Move): Boolean {
         if (move.piece != Piece.BLACK) {

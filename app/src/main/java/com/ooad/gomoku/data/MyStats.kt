@@ -10,6 +10,7 @@ enum class GameResult {
     DRAW
 }
 
+// @Pattern (Singleton - Eager Instantiation)
 object MyStats : Stats() {
     private lateinit var file: File
 
