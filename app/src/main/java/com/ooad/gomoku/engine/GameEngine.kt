@@ -19,7 +19,13 @@ enum class States {
     TERMINATED
 }
 
-class GameEngine(private val proxy: RemoteGameEngineProxy, private val boardView: BoardView) : EngineInterface {
+/*
+ * @Pattern (Proxy Pattern)
+ *
+ * GameEngine is a service of proxy pattern.
+ */
+class GameEngine(private val proxy: RemoteGameEngineProxy, private val boardView: BoardView) :
+    EngineInterface {
     private val publisher = ResultPublisher
     private val board = Board(boardView)
     private val states = mapOf(
@@ -36,6 +42,7 @@ class GameEngine(private val proxy: RemoteGameEngineProxy, private val boardView
 
     private lateinit var player: Player
     private val resultObserver: Observer = StatSaver()
+
     init {
         publisher.registerObserver(resultObserver)
         boardView.onMove = ::move

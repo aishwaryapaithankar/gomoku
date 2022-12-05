@@ -4,10 +4,15 @@ import com.ooad.gomoku.data.Move
 import com.ooad.gomoku.data.Player
 import com.ooad.gomoku.network.ConnectionManager
 
+/*
+ * @Pattern (Proxy Pattern)
+ *
+ * RemoteGameEngineProxy is a proxy of proxy pattern.
+ */
 class RemoteGameEngineProxy(private val connManager: ConnectionManager) : EngineInterface {
 
-    lateinit var onMove : (Move) -> Unit
-    lateinit var onPlayer : (Player) -> Unit
+    lateinit var onMove: (Move) -> Unit
+    lateinit var onPlayer: (Player) -> Unit
 
     init {
         connManager.onData = { data ->
