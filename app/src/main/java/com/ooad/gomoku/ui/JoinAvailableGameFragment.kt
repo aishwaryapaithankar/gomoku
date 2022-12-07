@@ -89,16 +89,17 @@ class JoinAvailableGameFragment : Fragment() {
         requireActivity().runOnUiThread {
             gamesListAdapter.notifyDataSetChanged()
             if (games.size > 0) {
-                val label: TextView? = view?.findViewById(R.id.available_label)
-                label?.visibility = View.VISIBLE
+                view?.findViewById<TextView>(R.id.available_label)?.visibility = View.VISIBLE
             }
         }
 
     }
 
     private fun addGame(newGame: String) {
-        games.add(newGame)
-        displayGames()
+        if (!games.contains(newGame)) {
+            games.add(newGame)
+            displayGames()
+        }
     }
 
     private fun joinGame(gameName: String) {
