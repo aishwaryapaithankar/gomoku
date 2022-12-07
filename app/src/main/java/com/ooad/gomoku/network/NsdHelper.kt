@@ -2,6 +2,7 @@ package com.ooad.gomoku.network
 
 import android.content.Context
 import android.net.nsd.NsdManager
+import android.net.nsd.NsdManager.RegistrationListener
 import android.net.nsd.NsdServiceInfo
 import android.util.Log
 
@@ -14,6 +15,9 @@ class NsdHelper(context: Context) {
     lateinit var serviceName: String
     lateinit var onServerDiscovered: (NsdServiceInfo) -> Unit
 
+    private var registrationListener: RegistrationListener? = null
+    private var discoveryListener: NsdManager.DiscoveryListener? = null
+
     fun registerService(name: String) {
         serviceName = name
         val serviceInfo = NsdServiceInfo().apply {
@@ -22,25 +26,29 @@ class NsdHelper(context: Context) {
             port = localPort  // Use the port of the hosted server socket
         }
 
+        registrationListener = registrationListener ?: createRegistrationListener()
         nsdManager.registerService(serviceInfo, NsdManager.PROTOCOL_DNS_SD, registrationListener)
     }
 
     fun discoverService() {
+        discoveryListener = discoveryListener ?: createDiscoveryListener()
         nsdManager.discoverServices(SERVICE_TYPE, NsdManager.PROTOCOL_DNS_SD, discoveryListener)
     }
 
     fun tearDown() {
         try {
             nsdManager.apply {
-                unregisterService(registrationListener)
-                stopServiceDiscovery(discoveryListener)
+                registrationListener?.apply { unregisterService(this) }
+                registrationListener = null
+                discoveryListener?.apply { stopServiceDiscovery(this) }
+                discoveryListener = null
             }
         } catch (e: Exception) {
-            Log.i(TAG, "Handled exception: ${e.message}")
+            Log.e(TAG, "Handled exception: ${e.message}")
         }
     }
 
-    private val registrationListener = object : NsdManager.RegistrationListener {
+    private fun createRegistrationListener() = object : RegistrationListener {
         override fun onRegistrationFailed(serviceInfo: NsdServiceInfo?, code: Int) {
             Log.e(TAG, "Registration failed! Name: ${serviceInfo?.serviceName}, Code: $code")
         }
@@ -69,7 +77,7 @@ class NsdHelper(context: Context) {
         }
     }
 
-    private val discoveryListener = object : NsdManager.DiscoveryListener {
+    private fun createDiscoveryListener() = object : NsdManager.DiscoveryListener {
         override fun onStartDiscoveryFailed(serviceType: String?, code: Int) {
             Log.e(TAG, "Discovery failed! Code: $code")
             nsdManager.stopServiceDiscovery(this)

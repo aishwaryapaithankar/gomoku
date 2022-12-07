@@ -56,11 +56,6 @@ class JoinAvailableGameFragment : Fragment() {
         listview?.onItemClickListener =
             AdapterView.OnItemClickListener { adapterView, _, position, _ ->
                 joinGame(adapterView.getItemAtPosition(position) as String)
-                Toast.makeText(
-                    requireActivity(),
-                    "click item at position $position",
-                    Toast.LENGTH_SHORT
-                ).show()
             }
         val rippleBackground = getView()?.findViewById<View>(R.id.ripple) as RippleBackground
         rippleBackground.startRippleAnimation()

@@ -25,5 +25,6 @@
         android:paddingEnd="16dp"
         android:paddingVertical="8dp"
         android:maxLines="1"
+        android:textColor="@color/dark_brown"
         android:textAppearance="?attr/textAppearanceSubtitle1" />
 </LinearLayout>

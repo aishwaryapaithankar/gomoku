@@ -18,6 +18,7 @@
             android:id="@+id/player_name_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -25,18 +26,21 @@
             android:id="@+id/games_won_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:textSize="12sp" />
 
         <TextView
             android:id="@+id/games_lost_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:textSize="12sp" />
 
         <TextView
             android:id="@+id/games_drawn_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:textSize="12sp" />
     </LinearLayout>
 </merge>
