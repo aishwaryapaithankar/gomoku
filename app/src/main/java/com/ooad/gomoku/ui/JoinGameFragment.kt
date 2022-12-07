@@ -33,6 +33,8 @@ class JoinGameFragment : Fragment() {
         getView()?.findViewById<Button>(R.id.join_button)?.setOnClickListener {
             val playerName =
                 getView()?.findViewById<TextInputLayout>(R.id.input_name)?.editText?.text.toString()
+            if (playerName.isEmpty())
+                return@setOnClickListener
             val availableGameFragment =
                 JoinAvailableGameFragment.newInstance(bundleOf(KEY_PLAYER_NAME to playerName))
             requireActivity().supportFragmentManager.beginTransaction()
