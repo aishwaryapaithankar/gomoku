@@ -40,3 +40,5 @@ Then, follow these steps:
 
 1. ### Identifying Patterns in code
    We have commented about the four patterns in code, all these comments start with `@Pattern`.
+2. ### Identifying library usage in code
+   We have commented about library usage in code, all these comments start with `@Library`.
