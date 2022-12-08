@@ -9,6 +9,7 @@
 
 
     <!--    @Library : brandmark.io generated logo used-->
+    <!--    https://brandmark.io/-->
     <ImageView
         android:id="@+id/game_title"
         android:layout_width="389dp"

@@ -36,6 +36,7 @@
         app:layout_constraintHorizontal_bias="0.0" />
 
     <!--    @Library : Material UI component used-->
+    <!--    https://m2.material.io/develop/android-->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/input_name"
         style="@style/PlayerNameInputBoxStyle"
@@ -71,6 +72,7 @@
         app:layout_constraintTop_toBottomOf="@+id/input_name" />
 
     <!--    @Library : android-ripple-background component used-->
+    <!--   https://github.com/skyfishjy/android-ripple-background-->
     <com.skyfishjy.library.RippleBackground
         android:layout_width="match_parent"
         android:layout_height="match_parent"

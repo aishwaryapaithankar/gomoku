@@ -39,6 +39,7 @@
 
 
     <!--    @Library : android-ripple-background component used-->
+    <!--    https://github.com/skyfishjy/android-ripple-background-->
     <com.skyfishjy.library.RippleBackground
         android:layout_width="match_parent"
         android:layout_height="match_parent"
