@@ -14,11 +14,12 @@ class WhiteToPlay(private val engine: GameEngine, private val board: Board) : St
 
 
     override fun move(move: Move): Boolean {
+        //Check if the player is allowed to play
         if (move.piece != Piece.WHITE) {
             Log.i(TAG, "Invalid move: ${move.piece}")
             return false
         }
-
+        //Based on if the adding piece to the board was successful change the board state.
         return if (board.addPiece(move)) {
             if (board.boardState == BoardState.IN_PROGRESS)
                 engine.changeState(States.BLACK_TO_PLAY)

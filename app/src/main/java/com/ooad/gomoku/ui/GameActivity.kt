@@ -20,6 +20,7 @@ import com.ooad.gomoku.network.ConnectionManager
 import com.ooad.gomoku.ui.view.BoardView
 import com.ooad.gomoku.ui.view.PlayerInfoComponent
 
+//Class to handle GameActivity actions and rendering
 class GameActivity : AppCompatActivity() {
 
     private lateinit var connManager: ConnectionManager
@@ -40,7 +41,6 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        // mostly move this to viewModel
         val playerName = intent.getStringExtra(KEY_PLAYER_NAME) ?: "You"
         val playerType =
             intent.getStringExtra(KEY_PLAYER_TYPE) ?: return // Kill game if this happens

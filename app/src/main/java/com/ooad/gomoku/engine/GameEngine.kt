@@ -50,6 +50,8 @@ class GameEngine(private val proxy: RemoteGameEngineProxy, private val boardView
         proxy.onPlayer = ::remotePlayer
     }
 
+
+    //Function to change state after game initialization is done.
     fun readyToPlay() {
         changeState(States.WHITE_TO_PLAY)
     }
@@ -60,6 +62,7 @@ class GameEngine(private val proxy: RemoteGameEngineProxy, private val boardView
 
     override fun move(move: Move) {
         Log.i(TAG, "Trying move: $move")
+        //delegate move to state pattern
         if (state.move(move)) {
             Log.i(TAG, "Successful move: $move")
             proxy.move(move)

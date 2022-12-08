@@ -14,6 +14,7 @@ import com.ooad.gomoku.R
 import com.ooad.gomoku.network.ConnectionManager
 import com.skyfishjy.library.RippleBackground
 
+//Fragment residing in JoinActivity to show available games
 class JoinAvailableGameFragment : Fragment() {
 
     companion object {

@@ -15,6 +15,7 @@ import com.ooad.gomoku.engine.Piece
 import kotlin.math.floor
 import kotlin.math.min
 
+//Custom BoardView for displaying gomoku board
 class BoardView(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
     var boardSize: Int
@@ -57,12 +58,15 @@ class BoardView(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
     }
 
+    //Init Board components
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         drawLines(canvas)
         drawPieces(canvas)
     }
 
+
+    //function for drawing board lines
     private fun drawLines(canvas: Canvas) {
         var x = 0f
         var y = 0f
@@ -76,6 +80,7 @@ class BoardView(context: Context, attrs: AttributeSet) : View(context, attrs) {
         }
     }
 
+    //function to render black and white stones
     private fun drawPieces(canvas: Canvas) {
         val cOffset = boardLen.toFloat() / (boardSize * 2)
         val cRadius = cOffset * 0.8f
@@ -95,7 +100,9 @@ class BoardView(context: Context, attrs: AttributeSet) : View(context, attrs) {
     }
 
     fun addPiece(x: Int, y: Int, piece: Piece) {
+        //check if piece exists on given location
         if (logicalBoard[x][y] != Piece.NONE) return
+        //if not then add piece
         logicalBoard[x][y] = piece
         invalidate()
         requestLayout()
@@ -134,6 +141,7 @@ class BoardView(context: Context, attrs: AttributeSet) : View(context, attrs) {
         override fun onSingleTapUp(e: MotionEvent): Boolean {
             Log.i(TAG, "x=${e.x}, y=${e.y}")
             val (x, y) = getBoardLocation(e.x, e.y)
+            //Check if tap is made outside board view
             if (x < 0 || x >= boardSize || y < 0 || y >= boardSize)
                 return true
 

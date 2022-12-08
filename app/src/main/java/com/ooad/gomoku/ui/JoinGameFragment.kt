@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputLayout
 import com.ooad.gomoku.R
 
@@ -16,8 +15,6 @@ class JoinGameFragment : Fragment() {
     companion object {
         fun newInstance() = JoinGameFragment()
     }
-
-    private lateinit var viewModel: JoinGameViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,7 +25,6 @@ class JoinGameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this)[JoinGameViewModel::class.java]
 
         getView()?.findViewById<Button>(R.id.join_button)?.setOnClickListener {
             val playerName =

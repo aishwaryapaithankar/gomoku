@@ -7,21 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.ooad.gomoku.R
 
 class MainFragment : Fragment() {
 
     companion object {
         fun newInstance() = MainFragment()
-    }
-
-    private lateinit var viewModel: MainViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-        // TODO: Use the ViewModel
     }
 
     override fun onCreateView(
@@ -34,11 +25,11 @@ class MainFragment : Fragment() {
         }
     }
 
-    private val hostGame : (View) -> Unit = {
+    private val hostGame: (View) -> Unit = {
         startActivity(Intent(requireActivity(), HostActivity::class.java))
     }
 
-    private val joinGame : (View) -> Unit = {
+    private val joinGame: (View) -> Unit = {
         startActivity(Intent(requireActivity(), JoinActivity::class.java))
     }
 }

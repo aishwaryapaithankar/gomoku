@@ -8,6 +8,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.ooad.gomoku.R
 
+
+//Custom component to display player statistics in GameActivity
 class PlayerInfoComponent(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
 
     private lateinit var colorImageView: ImageView

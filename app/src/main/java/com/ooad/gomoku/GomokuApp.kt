@@ -10,6 +10,7 @@ class GomokuApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        //Initialize the current player statistics
         MyStats.init(this)
     }
 }

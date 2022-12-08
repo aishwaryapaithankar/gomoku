@@ -9,6 +9,8 @@ import com.ooad.gomoku.data.Move
  * As there should be no movement done in Terminated state, the move method simply returns false.
  */
 class Init : State {
+
+    //Both players are not allowed to make any move in Init state, so the move function should return false.
     override fun move(move: Move): Boolean {
         return false
     }

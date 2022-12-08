@@ -7,6 +7,8 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainFragment">
 
+
+    <!--    @Library : brandmark.io generated logo used-->
     <ImageView
         android:id="@+id/game_title"
         android:layout_width="389dp"

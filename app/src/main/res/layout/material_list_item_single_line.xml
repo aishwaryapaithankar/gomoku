@@ -5,6 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?attr/selectableItemBackground"
     android:minHeight="?attr/minTouchTargetSize">
+
+    <!--    @Library : Material UI component used-->
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/material_list_item_icon"
         app:strokeColor="@color/dark_brown"

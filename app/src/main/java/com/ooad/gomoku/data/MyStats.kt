@@ -16,7 +16,7 @@ object MyStats : Stats() {
 
     fun init(context: Context) {
         createFileIfNotExists(context)
-
+        // read stats from internal storage file
         val content = file.readText().split(",").map { content -> parseInt(content.trim()) }
         won = content[0]
         lost = content[1]
@@ -28,6 +28,7 @@ object MyStats : Stats() {
         file = File(context.filesDir, "stats.csv")
         val notExists: Boolean = file.createNewFile()
         if (notExists) {
+            //write the default 0 values when the file is created.
             file.writeText("0,0,0,0")
         }
     }
@@ -39,6 +40,7 @@ object MyStats : Stats() {
             GameResult.DRAW -> drawn++
         }
         total++
+        //write the entire object back to file
         file.writeText(toString())
     }
 }

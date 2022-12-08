@@ -37,6 +37,8 @@
         android:textSize="24sp"
         app:layout_constraintTop_toBottomOf="@+id/games_list" />
 
+
+    <!--    @Library : android-ripple-background component used-->
     <com.skyfishjy.library.RippleBackground
         android:layout_width="match_parent"
         android:layout_height="match_parent"

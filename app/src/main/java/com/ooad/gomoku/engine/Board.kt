@@ -47,6 +47,8 @@ class Board(private val boardView: BoardView) {
 
     private fun getBoardState(move: Move): BoardState {
         val (x, y, piece) = move
+
+        //Check if 5 pieces of the same type are found diagonally from the top-left to bottom-right.
         for (i in -4..0) {
             val r = x + i
             val c = y + i
@@ -60,6 +62,7 @@ class Board(private val boardView: BoardView) {
             if (found) return getStateFromPiece(piece)
         }
 
+        //Check if 5 pieces of the same type are found diagonally from the bottom-left to top-right.
         for (i in 4 downTo 0) {
             val r = x + i
             val c = y - i
@@ -73,6 +76,7 @@ class Board(private val boardView: BoardView) {
             if (found) return getStateFromPiece(piece)
         }
 
+        //Check if 5 pieces of the same type are found diagonally from top to bottom.
         for (i in -4..0) {
             val r = x + i
             var found = true
@@ -85,6 +89,7 @@ class Board(private val boardView: BoardView) {
             if (found) return getStateFromPiece(piece)
         }
 
+        //Check if 5 pieces of the same type are found diagonally from left to right.
         for (i in -4..0) {
             val c = y + i
             var found = true
@@ -97,11 +102,12 @@ class Board(private val boardView: BoardView) {
             if (found) return getStateFromPiece(piece)
         }
 
+        //Check if the board is full, if not then the game is still in progress.
         for (row in logicalBoard) {
             if (row.contains(Piece.NONE))
                 return BoardState.IN_PROGRESS
         }
-
+        //if board is full then the game is drawn.
         return BoardState.DRAW
     }
 }

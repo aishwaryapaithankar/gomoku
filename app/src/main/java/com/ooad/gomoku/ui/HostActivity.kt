@@ -14,7 +14,7 @@ import com.ooad.gomoku.R
 import com.ooad.gomoku.network.ConnectionManager
 import com.skyfishjy.library.RippleBackground
 
-
+//Class to handle HostActivity actions and rendering
 class HostActivity : AppCompatActivity() {
 
     private lateinit var connManager: ConnectionManager
@@ -45,7 +45,7 @@ class HostActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.wait_label).isVisible = true
             findViewById<ProgressBar>(R.id.loadImage).isVisible = true
             val rippleBackground = findViewById<View>(R.id.rippleBG) as RippleBackground
-            rippleBackground.startRippleAnimation();
+            rippleBackground.startRippleAnimation()
             findViewById<TextView>(R.id.name_label).text = ""
             createButton.isVisible = false
 

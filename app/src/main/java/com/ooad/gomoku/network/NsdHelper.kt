@@ -7,8 +7,10 @@ import android.net.nsd.NsdServiceInfo
 import android.util.Log
 
 class NsdHelper(context: Context) {
-    // Code borrowed and adapted from:
-    // https://developer.android.com/training/connect-devices-wirelessly/nsd
+    /* @Library :
+    ** Code borrowed and adapted from:
+    ** https://developer.android.com/training/connect-devices-wirelessly/nsd
+    **/
     val nsdManager: NsdManager = context.getSystemService(Context.NSD_SERVICE) as NsdManager
     var localPort: Int = 0 //
 
@@ -114,4 +116,3 @@ class NsdHelper(context: Context) {
 
 private const val TAG = "NsdHelper"
 private const val SERVICE_TYPE = "_gomoku._tcp."
-//private const val SERVICE_NAME = "Gomoku"
